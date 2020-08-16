@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="category">
+        <item>영화</item>
+        <item>뮤지컬</item>
+        <item>연극</item>
+        <item>클래식</item>
+        <item>무용</item>
+        <item>전시</item>
+        <item>행사</item>
+        <item>콘서트</item>
+    </string-array>
+
+</resources>
