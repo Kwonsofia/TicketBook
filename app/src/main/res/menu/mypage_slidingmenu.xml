@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <!--한 번에 하나의 아이템만 클릭 가능. -->
+        <item
+            android:id="@+id/home"
+            android:icon="@drawable/home"
+            android:title="홈" />
+        <item
+            android:id="@+id/wistlist"
+            android:icon="@drawable/favorite"
+            android:title="위시리스트" />
+
+
+    </group>
+
+    <group android:checkableBehavior="single">
+
+        <item android:title="Out">
+            <menu>
+
+                <item
+                    android:id="@+id/logout"
+                    android:title="로그아웃" />
+
+            </menu>
+        </item>
+    </group>
+
+
+</menu>
