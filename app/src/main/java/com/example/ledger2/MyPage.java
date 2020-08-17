@@ -1,7 +1,10 @@
 package com.example.ledger2;
 
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
@@ -29,7 +32,6 @@ public class MyPage extends AppCompatActivity {
 
 
         /*-------------------ToolBar---------------------*/
-        //setActionBar(toolbar);
         setSupportActionBar(toolbar);
 
         /*-------------------ViewPager---------------------*/
@@ -61,8 +63,22 @@ public class MyPage extends AppCompatActivity {
         });
 
         /*-------------------Navigation Drawer Menu---------------------*/
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+
+        ImageView openMenuImage = (ImageView) findViewById(R.id.icon_menu) ;
+        // 메뉴 이미지 클릭 시 메뉴 열리게 함.
+        openMenuImage.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout) ;
+                if (!drawer.isDrawerOpen(Gravity.RIGHT)) {
+                    drawer.openDrawer(Gravity.RIGHT) ;
+                }
+            }
+        });
+
     }
 }

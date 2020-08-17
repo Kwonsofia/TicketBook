@@ -20,19 +20,19 @@ public class MyPage_PageAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
         switch (position){
-            case 0: {
+            case 1: {
                 MyPage_TabOne_Musical myPageTaboneMusical = new MyPage_TabOne_Musical();
                 return myPageTaboneMusical;
             }
-            case 1: {
+            case 2: {
                 MyPage_TabTwo_Play myPageTabTwoPlay = new MyPage_TabTwo_Play();
                 return myPageTabTwoPlay;
             }
-            case 2:{
+            case 3:{
                 MyPage_TabThree_Exhibition myPageTabThreeExhibition = new MyPage_TabThree_Exhibition();
                 return myPageTabThreeExhibition;
             }
-            case 3:{
+            case 4:{
                 MyPage_TabFour_Etc myPageTabFourEtc = new MyPage_TabFour_Etc();
                 return  myPageTabFourEtc;
             }
