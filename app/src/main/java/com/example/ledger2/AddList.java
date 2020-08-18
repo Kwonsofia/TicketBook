@@ -88,11 +88,12 @@ public class AddList extends Activity {
         });
 
 
-        //저장하기
+        //저장하기(제목, 날짜, 시간, 상세내용)
         Button saveButton=(Button)findViewById(R.id.save);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent2=new Intent(getBaseContext(), Calendar.class);
                 startActivity(intent2);
                 finish();
