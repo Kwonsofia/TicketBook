@@ -29,7 +29,9 @@ public class MyPage extends AppCompatActivity {
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         Toolbar toolbar = findViewById(R.id.toolbar);
-
+        ImageView imageView_tabCalendar = findViewById(R.id.calendar_page);
+        ImageView imageView_tabAccount = findViewById(R.id.ledger);
+        ImageView imageView_tabMyPage = findViewById(R.id.my_page);
 
 
         /*-------------------ToolBar---------------------*/
