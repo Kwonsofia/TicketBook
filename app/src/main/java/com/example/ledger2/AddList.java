@@ -18,11 +18,17 @@ import android.widget.ImageView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.HashMap;
+import java.util.Map;
 
-public class AddList extends Activity {
+public class AddList extends AppCompatActivity {
+    private DatabaseReference mPostReference;
     private static final int PICK_FROM_CAMERA = 0;
     private static final int PICK_FROM_ALBUM = 1;
     private static final int CROP_FROM_IMAGE = 2;
@@ -31,7 +37,20 @@ public class AddList extends Activity {
     private ImageView iv_UserPhoto;
     private String absolutePath;
 
+    String id;  //사용자 아이디
+    String title;
+    int year;  //년도
+    int month;  //월
+    int date;  //일
+    int hour;  //시간
+    int min;  //분
+    String pmam;  //오전오후
+    String detail;  //상세내용
+    Bitmap imgUri;  //이미지
+
+
     public void onCreate(Bundle savedInstanceState){
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_list);
 
@@ -93,6 +112,13 @@ public class AddList extends Activity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //아이디
+
+                //제목
+                //날짜
+                //시간
+                //상세내용
 
                 Intent intent2=new Intent(getBaseContext(), Calendar.class);
                 startActivity(intent2);
@@ -182,5 +208,19 @@ public class AddList extends Activity {
 //            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
 //        }
 //    }
+
+
+    public void postFirebaseDatabase(boolean add){
+        mPostReference= FirebaseDatabase.getInstance().getReference();
+        Map<String, Object> childUpdates=new HashMap<>();
+        Map<String, Object> scheduleValues=null;
+        if(add){
+            Schedule schedule=
+                    new Schedule(id, title, year, month, date, hour, min, pmam, detail, imgUri);
+            scheduleValues=schedule.toMap();
+        }
+        childUpdates.put("/id_list/"+id, scheduleValues);
+        mPostReference.updateChildren(childUpdates);
+    }
 }
 
