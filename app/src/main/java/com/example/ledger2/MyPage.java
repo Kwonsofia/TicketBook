@@ -1,5 +1,6 @@
 package com.example.ledger2;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -9,10 +10,14 @@ import android.widget.ImageView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 public class MyPage extends AppCompatActivity {
@@ -25,7 +30,7 @@ public class MyPage extends AppCompatActivity {
         /*-------------------Hooks---------------------*/
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tablayout);
         final ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-        MyPage_PageAdapter myPage_pageAdapter = new MyPage_PageAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+        MyPage_PageAdapter myPage_pageAdapter = new MyPage_PageAdapter(getSupportFragmentManager(), 4);
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -33,12 +38,30 @@ public class MyPage extends AppCompatActivity {
         ImageView imageView_tabAccount = findViewById(R.id.ledger);
         ImageView imageView_tabMyPage = findViewById(R.id.my_page);
 
+        /*-------------------TabImage_BOTTOMBAR---------------------*/
+        imageView_tabCalendar.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentTabone = new Intent(MyPage.this,Calendar.class);
+                startActivity(intentTabone);
+            }
+        });
+        imageView_tabAccount.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentTabtwo = new Intent(MyPage.this,Calendar.class);
+                startActivity(intentTabtwo);
+            }
+        });
+
+
 
         /*-------------------ToolBar---------------------*/
         setSupportActionBar(toolbar);
 
         /*-------------------ViewPager---------------------*/
         viewPager.setAdapter(myPage_pageAdapter);
+
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
         /*-------------------TabLayout---------------------*/
@@ -47,6 +70,9 @@ public class MyPage extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("전시회"));
         tabLayout.addTab(tabLayout.newTab().setText("기타"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+//        tabLayout.addOnTabSelectedListener(TabLayout.onTabSelectedListener{
+//
+//        });
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -85,3 +111,4 @@ public class MyPage extends AppCompatActivity {
 
     }
 }
+
