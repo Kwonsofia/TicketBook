@@ -31,6 +31,7 @@ public class MyPage extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
 
 
+
         /*-------------------ToolBar---------------------*/
         setSupportActionBar(toolbar);
 
