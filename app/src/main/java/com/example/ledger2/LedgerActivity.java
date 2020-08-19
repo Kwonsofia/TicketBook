@@ -30,7 +30,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 
@@ -50,7 +49,6 @@ public class LedgerActivity extends AppCompatActivity {
     ImageView my_page;
 
     String getTime;
-    Intent intent;
 
 
     @Override
@@ -122,7 +120,7 @@ public class LedgerActivity extends AppCompatActivity {
         findViewById(R.id.add_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(LedgerActivity.this, AddActivity.class);
+                Intent intent = new Intent(LedgerActivity.this, AddActivity.class);
                 startActivityForResult(intent, 0);
 
             }
@@ -245,8 +243,8 @@ public class LedgerActivity extends AppCompatActivity {
         calendar_page.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(LedgerActivity.this, Calendar.class);
-                startActivity(intent);
+                Intent intent_one = new Intent(LedgerActivity.this, Calendar.class);
+                LedgerActivity.this.startActivity(intent_one);
             }
         });
 
@@ -255,8 +253,8 @@ public class LedgerActivity extends AppCompatActivity {
         my_page.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(LedgerActivity.this, MyPage.class);
-                startActivity(intent);
+                Intent intent_two = new Intent(LedgerActivity.this, MyPage.class);
+                LedgerActivity.this.startActivity(intent_two);
             }
         });
 
