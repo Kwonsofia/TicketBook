@@ -138,7 +138,7 @@ public class MyPage extends AppCompatActivity implements NavigationView.OnNaviga
             super.onBackPressed();
         }
     } //onBackPressed()
-
+//
 
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
