@@ -25,8 +25,15 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-public class MyPage extends AppCompatActivity {
-    final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+public class MyPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    DrawerLayout drawerLayout;
+    Toolbar toolbar;
+    NavigationView navigationView;
+
+    TabLayout tabLayout;
+    ViewPager viewPager;
+    MyPage_PageAdapter myPage_pageAdapter;
+
     //onCreate외에도 다른 함수에서 사용하기 위해 밖으로 빼주었음.
 
     @Override
@@ -35,31 +42,32 @@ public class MyPage extends AppCompatActivity {
         setContentView(R.layout.activity_mypage);
 
         /*-------------------Hooks---------------------*/
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tablayout);
-        final ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-        MyPage_PageAdapter myPage_pageAdapter = new MyPage_PageAdapter(getSupportFragmentManager(), 4);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
+        toolbar = findViewById(R.id.toolbar);
 
-
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        tabLayout = (TabLayout) findViewById(R.id.tablayout);
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        myPage_pageAdapter = new MyPage_PageAdapter(getSupportFragmentManager(), 4);
 
         ImageView imageView_tabCalendar = findViewById(R.id.calendar_page);
         ImageView imageView_tabAccount = findViewById(R.id.ledger);
         ImageView imageView_tabMyPage = findViewById(R.id.my_page);
 
         /*-------------------TabImage_BOTTOMBAR---------------------*/
-        imageView_tabCalendar.setOnClickListener(new Button.OnClickListener() {
+
+        imageView_tabCalendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentone = new Intent(MyPage.this, Calendar.class);
-                startActivity(intentone);
+                Intent intent_one = new Intent(MyPage.this, Calendar.class);
+                MyPage.this.startActivity(intent_one);
             }
         });
-        imageView_tabAccount.setOnClickListener(new Button.OnClickListener() {
+        imageView_tabAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intenttwo = new Intent(MyPage.this, LedgerActivity.class);
-                startActivity(intenttwo);
+                Intent intent_two = new Intent(MyPage.this, LedgerActivity.class);
+                MyPage.this.startActivity(intent_two);
             }
         });
 
@@ -98,7 +106,7 @@ public class MyPage extends AppCompatActivity {
         });
 
         /*-------------------Navigation Drawer Menu---------------------*/
-        navigationView.bringToFront(); /////??????????????????????????????????????????????
+        navigationView.bringToFront();
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -106,13 +114,8 @@ public class MyPage extends AppCompatActivity {
         toggle.syncState();
 
 
-//        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                return false;
-//            }
-//        });
-        navigationView.setNavigationItemSelectedListener((NavigationView.OnNavigationItemSelectedListener) this);
+        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setCheckedItem(R.id.home);
 
         ImageView openMenuImage = (ImageView) findViewById(R.id.icon_menu);
         // 메뉴 이미지 클릭 시 메뉴 열리게 함.
@@ -125,10 +128,6 @@ public class MyPage extends AppCompatActivity {
                 }
             }
         });
-
-        navigationView.setCheckedItem(R.id.home);
-
-
     } //onCreate()
 
     @Override
@@ -148,8 +147,8 @@ public class MyPage extends AppCompatActivity {
                 startActivity(intent_home);
                 break;
             case R.id.wishlist:
-                Intent intent_wishlist = new Intent(MyPage.this, MyPage_WishList.class);
-                startActivity(intent_wishlist);
+                Intent intent_wish = new Intent(MyPage.this, MyPage_WishList.class);
+                startActivity(intent_wish);
                 break;
             case R.id.logout:
                 Toast.makeText(this, "로그아웃되었습니다.", Toast.LENGTH_SHORT).show();
@@ -160,5 +159,9 @@ public class MyPage extends AppCompatActivity {
         return true;
     }
 
+//    @Override
+//    public void onPointerCaptureChanged(boolean hasCapture) {
+//
+//    }
 }
 
