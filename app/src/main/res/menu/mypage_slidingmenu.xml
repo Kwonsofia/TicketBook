@@ -5,9 +5,9 @@
         <item
             android:id="@+id/home"
             android:icon="@drawable/home"
-            android:title="홈"/>
+            android:title="홈" />
         <item
-            android:id="@+id/wistlist"
+            android:id="@+id/wishlist"
             android:icon="@drawable/favorite"
             android:title="위시리스트" />
 

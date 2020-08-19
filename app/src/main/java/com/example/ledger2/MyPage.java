@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -25,6 +26,8 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 public class MyPage extends AppCompatActivity {
+    final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+    //onCreate외에도 다른 함수에서 사용하기 위해 밖으로 빼주었음.
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,7 +39,7 @@ public class MyPage extends AppCompatActivity {
         final ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         MyPage_PageAdapter myPage_pageAdapter = new MyPage_PageAdapter(getSupportFragmentManager(), 4);
 
-        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+
         NavigationView navigationView = findViewById(R.id.nav_view);
         Toolbar toolbar = findViewById(R.id.toolbar);
 
@@ -48,15 +51,15 @@ public class MyPage extends AppCompatActivity {
         imageView_tabCalendar.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentTabone = new Intent(MyPage.this,Calendar.class);
-                startActivity(intentTabone);
+                Intent intentone = new Intent(MyPage.this, Calendar.class);
+                startActivity(intentone);
             }
         });
         imageView_tabAccount.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentTabtwo = new Intent(MyPage.this,Calendar.class);
-                startActivity(intentTabtwo);
+                Intent intenttwo = new Intent(MyPage.this, LedgerActivity.class);
+                startActivity(intenttwo);
             }
         });
 
@@ -95,56 +98,67 @@ public class MyPage extends AppCompatActivity {
         });
 
         /*-------------------Navigation Drawer Menu---------------------*/
+        navigationView.bringToFront(); /////??????????????????????????????????????????????
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        ImageView openMenuImage = (ImageView) findViewById(R.id.icon_menu) ;
+
+//        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                return false;
+//            }
+//        });
+        navigationView.setNavigationItemSelectedListener((NavigationView.OnNavigationItemSelectedListener) this);
+
+        ImageView openMenuImage = (ImageView) findViewById(R.id.icon_menu);
         // 메뉴 이미지 클릭 시 메뉴 열리게 함.
         openMenuImage.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout) ;
+                DrawerLayout drawer = findViewById(R.id.drawer_layout);
                 if (!drawer.isDrawerOpen(Gravity.RIGHT)) {
-                    drawer.openDrawer(Gravity.RIGHT) ;
+                    drawer.openDrawer(Gravity.RIGHT);
                 }
             }
         });
 
+        navigationView.setCheckedItem(R.id.home);
 
 
-    }
+    } //onCreate()
+
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // 메뉴의 항목을 선택(클릭)했을 때 호출되는 콜백메서드
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        Log.d("test", "onOptionsItemSelected - 메뉴항목을 클릭했을 때 호출됨");
-
-        int id = item.getItemId();
-
-
-        switch(id) {
-            case R.id.home:
-                Toast.makeText(getApplicationContext(), "홈 메뉴 클릭",
-                        Toast.LENGTH_SHORT).show();
-                Intent intentmenuhome = new Intent(MyPage.this,Calendar.class);
-                startActivity(intentmenuhome);
-                return true;
-            case R.id.wistlist:
-                Toast.makeText(getApplicationContext(), "위시리스트 메뉴 클릭",
-                        Toast.LENGTH_SHORT).show();
-                Intent intentmenuwishlist = new Intent(MyPage.this,MyPage_WishList.class);
-                startActivity(intentmenuwishlist);
-                return true;
-            case R.id.logout:
-                Toast.makeText(getApplicationContext(), "로그아웃되었습니다.",
-                        Toast.LENGTH_SHORT).show();
-                return true;
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
         }
-        return super.onOptionsItemSelected(item);
+    } //onBackPressed()
+
+
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.home:
+                Intent intent_home = new Intent(MyPage.this, Calendar.class);
+                startActivity(intent_home);
+                break;
+            case R.id.wishlist:
+                Intent intent_wishlist = new Intent(MyPage.this, MyPage_WishList.class);
+                startActivity(intent_wishlist);
+                break;
+            case R.id.logout:
+                Toast.makeText(this, "로그아웃되었습니다.", Toast.LENGTH_SHORT).show();
+                break;
+        }
+        drawerLayout.closeDrawer(GravityCompat.START);
+        //메뉴가 선택되면 행해지기 전에 Drawer가 닫힘.
+        return true;
     }
+
 }
 

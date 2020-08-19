@@ -32,7 +32,6 @@
             android:id="@+id/toolbar"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="#ffffff"
             android:clickable="true"
             android:focusable="true"
             android:gravity="top"
