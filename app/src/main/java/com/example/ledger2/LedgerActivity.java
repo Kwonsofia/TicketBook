@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,8 +46,11 @@ public class LedgerActivity extends AppCompatActivity {
 
     TextView textMonth;
     TextView textSum;
+    ImageView calendar_page;
+    ImageView my_page;
 
     String getTime;
+    Intent intent;
 
 
     @Override
@@ -56,6 +60,8 @@ public class LedgerActivity extends AppCompatActivity {
 
         textMonth = findViewById(R.id.textMonth);
         textSum = findViewById(R.id.textSum);
+        calendar_page = findViewById(R.id.calendar_page);
+        my_page = findViewById(R.id.my_page);
 
 
         recyclerView = findViewById(R.id.recyclerView);
@@ -116,7 +122,7 @@ public class LedgerActivity extends AppCompatActivity {
         findViewById(R.id.add_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LedgerActivity.this, AddActivity.class);
+                intent = new Intent(LedgerActivity.this, AddActivity.class);
                 startActivityForResult(intent, 0);
 
             }
@@ -235,6 +241,24 @@ public class LedgerActivity extends AppCompatActivity {
             }
         });
 
+        // 캘린더로 이동
+        calendar_page.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(LedgerActivity.this, Calendar.class);
+                startActivity(intent);
+            }
+        });
+
+
+        // 마이페이지로 이동
+        my_page.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(LedgerActivity.this, MyPage.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
