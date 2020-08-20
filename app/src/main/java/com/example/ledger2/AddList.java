@@ -2,6 +2,7 @@ package com.example.ledger2;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -160,15 +161,15 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
                 //제목
                 stitle = title.getText().toString();
                 //날짜 데이터
-//                datePicker.init(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth(),
-//                        new DatePicker.OnDateChangedListener() {
-//                            @Override
-//                            public void onDateChanged(DatePicker view, String year, String monthOfYear, String dayOfMonth) {
-//                                years = year;
-//                                month = monthOfYear;
-//                                date = dayOfMonth;
-//                            }
-//                        });
+                datePicker.init(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth(),
+                        new DatePicker.OnDateChangedListener() {
+                            @Override
+                            public void onDateChanged(DatePicker view, String year, String monthOfYear, String dayOfMonth) {
+                                years = year;
+                                month = monthOfYear;
+                                date = dayOfMonth;
+                            }
+                        });
                 //시간
                 onTimeChanged(timePicker, hour, min);
 
@@ -338,6 +339,17 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
             }
         }
         return text;
+    }
+
+    void showDate(){
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int mYear, int month, int dayOfMonth) {
+                inputDate = String.format("%04d-%02d-%02d",mYear,month+1,dayOfMonth);
+                eDate.setText(inputDate);
+            }
+        }, year, month, day);
+        datePickerDialog.show();
     }
 
     @Override

@@ -108,12 +108,19 @@
                         android:textColor="#000000"
                         android:textSize="20dp" />
 
-                    <DatePicker
+                    <EditText
                         android:id="@+id/datePicker"
-                        android:layout_width="wrap_content"
+                        android:layout_width="250dp"
                         android:layout_height="wrap_content"
-                        android:calendarViewShown="false"
-                        android:datePickerMode="spinner" />
+                        android:inputType="text"
+                        android:textSize="20dp"/>
+
+                    <ImageButton
+                        android:id="@+id/date_button"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:src="@android:drawable/ic_menu_my_calendar"/>
 
                 </LinearLayout>
 
