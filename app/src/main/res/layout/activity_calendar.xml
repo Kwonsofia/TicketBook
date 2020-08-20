@@ -69,10 +69,11 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <ListView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/schedule_list"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="match_parent"
+                    android:scrollbars="vertical"/>
 
             </LinearLayout>
 
@@ -99,13 +100,13 @@
             />
 
         <ImageView
-            android:id="@+id/ledger_page"
+            android:id="@+id/ledger"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:textSize="20dp"
-            android:src="@drawable/ic_credit_card_black_24dp"
+            android:src="@drawable/ic_baseline_credit_card_24"
             android:padding="15dp"/>
 
         <ImageView
@@ -117,7 +118,6 @@
             android:textSize="20dp"
             android:src="@drawable/ic_view_list_black_24dp"
             android:padding="15dp"/>
-
 
     </LinearLayout>
 

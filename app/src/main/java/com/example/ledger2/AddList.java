@@ -26,6 +26,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,7 +38,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -53,29 +54,34 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
 
     //    String id;  //사용자 아이디
     String stitle;
-    int years;  //년도
-    int month;  //월
-    int date;  //일
+    String years;  //년도
+    String month;  //월
+    String date;  //일
     int hour;  //시간
     int min;  //분
     String pmam;  //오전오후
     String details;  //상세내용
     Bitmap imgUri;  //이미지
 
-    String sort = "id";
+    String sort="id";
 
     EditText title;
     EditText detail;
 
     ArrayAdapter<String> arrayAdapter;
+    FirebaseAuth mFirebaseAuth;
+    FirebaseUser mFirebaseUser;
 
     static ArrayList<String> arrayIndex = new ArrayList<String>();
-    static ArrayList<String> arrayData = new ArrayList<String>();
+    static ArrayList<String> arraySchedule = new ArrayList<String>();
 
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_list);
+
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
         title = (EditText) findViewById(R.id.title);
         final DatePicker datePicker = (DatePicker) findViewById(R.id.datePicker);
@@ -87,7 +93,7 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
 
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
         ListView listView = (ListView) findViewById(R.id.schedule_list);
-        if (listView != null) {
+        if(listView != null){
             listView.setAdapter(arrayAdapter);
         }
 
@@ -108,7 +114,7 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
         imageAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent3 = new Intent(getApplicationContext(), AddList.class);
+                Intent intent3 = new Intent(getBaseContext(), AddList.class);
                 startActivity(intent3);
                 finish();
 
@@ -154,15 +160,15 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
                 //제목
                 stitle = title.getText().toString();
                 //날짜 데이터
-                datePicker.init(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth(),
-                        new DatePicker.OnDateChangedListener() {
-                            @Override
-                            public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                years = year;
-                                month = monthOfYear;
-                                date = dayOfMonth;
-                            }
-                        });
+//                datePicker.init(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth(),
+//                        new DatePicker.OnDateChangedListener() {
+//                            @Override
+//                            public void onDateChanged(DatePicker view, String year, String monthOfYear, String dayOfMonth) {
+//                                years = year;
+//                                month = monthOfYear;
+//                                date = dayOfMonth;
+//                            }
+//                        });
                 //시간
                 onTimeChanged(timePicker, hour, min);
 
@@ -200,7 +206,6 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
     }
 
     public void doTakeAlbumAction() { //카메라 촬영 후 이미지 가져오기
-
         Intent intent4 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         String url = "tmp_" + String.valueOf(System.currentTimeMillis()) + ".jpg";
@@ -260,6 +265,7 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
         }
     }
 
+
 //    private void storeCropImage(Bitmap photo, String filePath) {
 //        String dirPath=Environment.getExternalStorageDirectory().getAbsolutePath()+"/SmartWheel";
 //        File directory_SmartWheel=new File(dirPath);
@@ -277,8 +283,9 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
 //        }
 //    }
 
+
     public void postFirebaseDatabase(boolean add) {
-        mPostReference = FirebaseDatabase.getInstance().getReference();
+        mPostReference = FirebaseDatabase.getInstance().getReference(mFirebaseUser.getUid()+"/Calendar");
         Map<String, Object> childUpdates = new HashMap<>();
         Map<String, Object> scheduleValues = null;
         if (add) {
@@ -295,7 +302,7 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Log.e("getFirebaseDatabase", "key: " + dataSnapshot.getChildrenCount());
-                arrayData.clear();
+                arraySchedule.clear();
                 arrayIndex.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     String key = postSnapshot.getKey();
@@ -304,13 +311,13 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
                             String.valueOf(get.date), String.valueOf(get.hour), String.valueOf(get.min), get.detail};
                     String Result = setTextLength(info[0], 10) + setTextLength(info[1], 10) + setTextLength(info[2], 10) +
                             setTextLength(info[3], 10) + setTextLength(info[4], 10) + setTextLength(info[5], 10) + setTextLength(info[6], 10);
-                    arrayData.add(Result);
+                    arraySchedule.add(Result);
                     arrayIndex.add(key);
-                    Log.d("getFirebaseDatabase", "key: " + key);
-                    Log.d("getFirebaseDatabase", "info: " + info[0] + info[1] + info[2] + info[3] + info[4] + info[5] + info[6]);
+                    Log.d("getFirebaseDatabase", "key: "+key);
+                    Log.d("getFirebaseDatabase", "info: "+info[0]+ info[1]+info[2]+info[3]+info[4]+info[5]+info[6]);
                 }
                 arrayAdapter.clear();
-                arrayAdapter.addAll(arrayData);
+                arrayAdapter.addAll(arraySchedule);
                 arrayAdapter.notifyDataSetChanged();
             }
 
@@ -319,7 +326,7 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
                 Log.w("getFirebaseDatabase", "loadPost:onCancelled", databaseError.toException());
             }
         };
-        Query sortbyAge = FirebaseDatabase.getInstance().getReference().child("id_list").orderByChild(sort);
+        Query sortbyAge=FirebaseDatabase.getInstance().getReference().child("id_list").orderByChild(sort);
         sortbyAge.addListenerForSingleValueEvent(postListener);
     }
 
