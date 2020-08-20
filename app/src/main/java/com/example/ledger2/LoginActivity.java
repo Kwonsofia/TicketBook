@@ -39,7 +39,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     EditText password_edittext;
     Button email_login_button;
     Button email_join_button;
-    //
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
