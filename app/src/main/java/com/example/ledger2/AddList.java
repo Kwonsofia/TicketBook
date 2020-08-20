@@ -152,7 +152,7 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
 
                 //제목
                 stitle = title.getText().toString();
-                //날짜
+                //날짜 데이터
                 datePicker.init(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth(),
                         new DatePicker.OnDateChangedListener() {
                             @Override
