@@ -95,7 +95,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:textSize="20dp"
-            android:src="@drawable/ic_date_range_black_24dp"
+            android:src="@drawable/ic_baseline_date_range_24"
             android:padding="15dp"
             />
 
@@ -106,7 +106,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:textSize="20dp"
-            android:src="@drawable/ic_baseline_credit_card_24"
+            android:src="@drawable/ic_credit_card_black_24dp"
             android:padding="15dp"/>
 
         <ImageView
