@@ -47,10 +47,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         setContentView(R.layout.activity_login);
 
         //new
-        email_edittext = (EditText) findViewById(R.id.email_edittext);
-        password_edittext = (EditText) findViewById(R.id.password_edittext);
-        email_login_button = (Button) findViewById(R.id.email_login_button);
-        email_join_button = (Button) findViewById(R.id.email_join_button);
+        email_edittext = findViewById(R.id.email_edittext);
+        password_edittext = findViewById(R.id.password_edittext);
+        email_login_button = findViewById(R.id.email_login_button);
+        email_join_button = findViewById(R.id.email_join_button);
 
         //이메일 회원가입
         email_join_button.setOnClickListener(new View.OnClickListener() {
