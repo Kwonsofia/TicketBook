@@ -54,9 +54,9 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
 
     //    String id;  //사용자 아이디
     String stitle;
-    int years;  //년도
-    int month;  //월
-    int date;  //일
+    String years;  //년도
+    String month;  //월
+    String date;  //일
     int hour;  //시간
     int min;  //분
     String pmam;  //오전오후
@@ -160,15 +160,15 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
                 //제목
                 stitle = title.getText().toString();
                 //날짜 데이터
-                datePicker.init(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth(),
-                        new DatePicker.OnDateChangedListener() {
-                            @Override
-                            public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                years = year;
-                                month = monthOfYear;
-                                date = dayOfMonth;
-                            }
-                        });
+//                datePicker.init(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth(),
+//                        new DatePicker.OnDateChangedListener() {
+//                            @Override
+//                            public void onDateChanged(DatePicker view, String year, String monthOfYear, String dayOfMonth) {
+//                                years = year;
+//                                month = monthOfYear;
+//                                date = dayOfMonth;
+//                            }
+//                        });
                 //시간
                 onTimeChanged(timePicker, hour, min);
 
