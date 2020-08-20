@@ -34,8 +34,6 @@ public class MyPage extends AppCompatActivity implements NavigationView.OnNaviga
     ViewPager viewPager;
     MyPage_PageAdapter myPage_pageAdapter;
 
-    //onCreate외에도 다른 함수에서 사용하기 위해 밖으로 빼주었음.
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,8 +112,8 @@ public class MyPage extends AppCompatActivity implements NavigationView.OnNaviga
         toggle.syncState();
 
 
-        navigationView.setNavigationItemSelectedListener(this);
-        navigationView.setCheckedItem(R.id.home);
+        navigationView.setNavigationItemSelectedListener(this); ///parameter변환이 아니라 implement... 이거 때문에 몇시간을 버린건지....
+        //navigationView.setCheckedItem(R.id.home);
 
         ImageView openMenuImage = (ImageView) findViewById(R.id.icon_menu);
         // 메뉴 이미지 클릭 시 메뉴 열리게 함.
@@ -143,15 +141,24 @@ public class MyPage extends AppCompatActivity implements NavigationView.OnNaviga
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.home:
-                Intent intent_home = new Intent(MyPage.this, Calendar.class);
-                startActivity(intent_home);
+                Intent intent = new Intent(getBaseContext(), Calendar.class);
+               // navigationView.setCheckedItem(R.id.home);
+                startActivity(intent);
+                finish();
                 break;
             case R.id.wishlist:
-                Intent intent_wish = new Intent(MyPage.this, MyPage_WishList.class);
+                Intent intent_wish = new Intent(getBaseContext(), MyPage_WishList.class);
+                //navigationView.setCheckedItem(R.id.wishlist);
                 startActivity(intent_wish);
+                finish();
                 break;
             case R.id.logout:
                 Toast.makeText(this, "로그아웃되었습니다.", Toast.LENGTH_SHORT).show();
+                navigationView.setCheckedItem(R.id.logout);
+                Intent intent_logout = new Intent(getBaseContext(), LoginActivity.class);
+               // navigationView.setCheckedItem(R.id.logout);
+                startActivity(intent_logout);
+                finish();
                 break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);
