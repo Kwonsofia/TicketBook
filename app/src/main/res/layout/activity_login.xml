@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorWhite"
     tools:context=".LoginActivity">
 
     <ImageView
@@ -11,7 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/signin_layout"
         android:layout_alignParentTop="true"
-        android:src="@drawable/logo_title" />
+        android:padding="5dp"
+        android:src="@drawable/main5" />
 
     <LinearLayout
         android:id="@+id/signin_layout"
@@ -24,8 +26,8 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp">
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp">
 
             <EditText
                 android:id="@+id/email_edittext"
@@ -37,8 +39,8 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp">
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp">
 
             <EditText
                 android:id="@+id/password_edittext"
@@ -59,7 +61,7 @@
                 android:id="@+id/email_login_button"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="25dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="20dp"
                 android:layout_weight="1"
@@ -72,7 +74,7 @@
                 android:layout_height="40dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="15dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginRight="25dp"
                 android:layout_weight="1"
                 android:text="@string/join_email"
                 android:theme="@style/ButtonStyle" />
@@ -83,9 +85,9 @@
             android:id="@+id/google_sign"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="25dp"
             android:layout_marginBottom="35dp"
             android:background="@drawable/btn_signin_google"
             android:text="@string/signin_google"
