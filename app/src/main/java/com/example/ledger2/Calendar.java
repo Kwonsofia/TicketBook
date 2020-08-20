@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
-import java.util.ArrayList;
 
 public class Calendar extends AppCompatActivity {
     @Override
@@ -58,9 +57,5 @@ public class Calendar extends AppCompatActivity {
                 Calendar.this.startActivity(intent_three);
             }
         });
-
-
-
-
     }
 }

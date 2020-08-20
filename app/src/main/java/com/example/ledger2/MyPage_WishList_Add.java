@@ -45,17 +45,18 @@ public class MyPage_WishList_Add extends AppCompatActivity {
 //        database_wishlist = FirebaseDatabase.getInstance().getReference();
 //        //데이터베이스에서 데이터를 읽거나 쓰려면 DatabaseReference의 인스턴스가 필요합니다.
 
-        findViewById(R.id.wish_add_save).setOnClickListener(new View.OnClickListener() {
+        button_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.putExtra("title", edit_wish_title.getText().toString());
                 intent.putExtra("memo", edit_wish_memo.getText().toString());
-                intent.putExtra("poster", image_wish_poster.getImageTintMode());
-                setResult(0, intent);
+                //intent.putExtra("poster", image_wish_poster.getImageTintMode());
+                setResult(1, intent);
 
-                Intent intent2 = new Intent(getBaseContext(), MyPage_WishList.class);
-                startActivity(intent2);
+//                Intent intent2 = new Intent(getBaseContext(), MyPage_WishList.class);
+//                startActivity(intent2);
+                finish();
 
             }
         });

@@ -41,16 +41,16 @@ public class MyPage_WishList extends AppCompatActivity {
     ImageView imageView_wishlist_back;
     ImageView imageView_wishlist_add;
 
-//    FirebaseAuth mFirebaseAuth;
-//    FirebaseUser mFirebaseUser;
+    FirebaseAuth mFirebaseAuth;
+    FirebaseUser mFirebaseUser;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mypage_wishlist);
 
-//        mFirebaseAuth = FirebaseAuth.getInstance();
-//        mFirebaseUser = mFirebaseAuth.getCurrentUser();
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
 
         /*--------------Hooks---------------*/
@@ -66,7 +66,7 @@ public class MyPage_WishList extends AppCompatActivity {
         database_mypage = FirebaseDatabase.getInstance();
 
 
-        databaseReference_mypage = database_mypage.getReference("/MyPage"); // DB 테이블 연결
+        databaseReference_mypage = database_mypage.getReference(mFirebaseUser.getUid()+"/MyPage"); // DB 테이블 연결
         databaseReference_mypage.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -88,9 +88,10 @@ public class MyPage_WishList extends AppCompatActivity {
             }
         });
 
-        adapter_mypage = new MyPage_RecyclerAdapter(arrayList_mypage, this,database_mypage);
+        adapter_mypage = new MyPage_RecyclerAdapter(arrayList_mypage);
         recyclerView_mypage.setAdapter(adapter_mypage);
 
+        //뒤로가기
         imageView_wishlist_back.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,11 +101,12 @@ public class MyPage_WishList extends AppCompatActivity {
             });
 
 
+        //추가하기
         imageView_wishlist_add.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent imageView_wishlist_add = new Intent(getBaseContext(), MyPage_WishList_Add.class);
-                startActivity(imageView_wishlist_add);
+                startActivityForResult(imageView_wishlist_add, 1);
             }
         });
 
@@ -118,14 +120,16 @@ public class MyPage_WishList extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == 0) {
+        if (resultCode == 1) {
             String workname = data.getStringExtra("title");
             String memo = data.getStringExtra("memo");
             //Image poster = data.
 
-            MyPage_WishList_User2 works = new MyPage_WishList_User2(workname, memo);
+            String key = workname;
 
-            database_mypage.getReference("/MyPage/").setValue(works);
+            MyPage_WishList_User2 works = new MyPage_WishList_User2(workname, memo, key);
+
+            database_mypage.getReference(mFirebaseUser.getUid()+"/MyPage/"+key).setValue(works);
 
         }
     }
