@@ -11,4 +11,7 @@
     <style name="ButtonStyle" parent="Widget.AppCompat.Button.Colored">
         <item name="colorButtonNormal">@color/colorWhite</item>
     </style>
+    <style name="ButtonStyle2" parent="Widget.AppCompat.Button.Colored">
+        <item name="colorButtonNormal">@color/colorMenu2</item>
+    </style>
 </resources>
