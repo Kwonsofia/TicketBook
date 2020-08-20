@@ -50,12 +50,12 @@ public class Calendar extends AppCompatActivity {
             }
         });
 
-        my_page.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent_three = new Intent(Calendar.this, MyPage.class);
-                Calendar.this.startActivity(intent_three);
-            }
-        });
+//        my_page.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent_three = new Intent(Calendar.this, MyPage.class);
+//                Calendar.this.startActivity(intent_three);
+//            }
+//        });
     }
 }
