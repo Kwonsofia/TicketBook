@@ -62,7 +62,7 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
     String details;  //상세내용
     Bitmap imgUri;  //이미지
 
-    String sort="id";
+    String sort = "id";
 
     EditText title;
     EditText detail;
@@ -87,7 +87,7 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
 
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
         ListView listView = (ListView) findViewById(R.id.schedule_list);
-        if(listView != null){
+        if (listView != null) {
             listView.setAdapter(arrayAdapter);
         }
 
@@ -108,7 +108,7 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
         imageAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent3 = new Intent(getBaseContext(), AddList.class);
+                Intent intent3 = new Intent(getApplicationContext(), AddList.class);
                 startActivity(intent3);
                 finish();
 
@@ -306,8 +306,8 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
                             setTextLength(info[3], 10) + setTextLength(info[4], 10) + setTextLength(info[5], 10) + setTextLength(info[6], 10);
                     arrayData.add(Result);
                     arrayIndex.add(key);
-                    Log.d("getFirebaseDatabase", "key: "+key);
-                    Log.d("getFirebaseDatabase", "info: "+info[0]+ info[1]+info[2]+info[3]+info[4]+info[5]+info[6]);
+                    Log.d("getFirebaseDatabase", "key: " + key);
+                    Log.d("getFirebaseDatabase", "info: " + info[0] + info[1] + info[2] + info[3] + info[4] + info[5] + info[6]);
                 }
                 arrayAdapter.clear();
                 arrayAdapter.addAll(arrayData);
@@ -319,7 +319,7 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
                 Log.w("getFirebaseDatabase", "loadPost:onCancelled", databaseError.toException());
             }
         };
-        Query sortbyAge=FirebaseDatabase.getInstance().getReference().child("id_list").orderByChild(sort);
+        Query sortbyAge = FirebaseDatabase.getInstance().getReference().child("id_list").orderByChild(sort);
         sortbyAge.addListenerForSingleValueEvent(postListener);
     }
 
