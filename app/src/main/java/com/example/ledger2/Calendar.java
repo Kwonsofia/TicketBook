@@ -45,7 +45,7 @@ public class Calendar extends AppCompatActivity {
         ledger_page.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent_two = new Intent(Calendar.this, LedgerActivity.class);
+                Intent intent_two= new Intent(Calendar.this, LedgerActivity.class);
                 Calendar.this.startActivity(intent_two);
             }
         });
@@ -57,5 +57,9 @@ public class Calendar extends AppCompatActivity {
                 Calendar.this.startActivity(intent_three);
             }
         });
+
+
+
+
     }
 }
