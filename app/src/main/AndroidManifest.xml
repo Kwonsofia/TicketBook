@@ -23,9 +23,7 @@
         </activity>
         <activity android:name=".LedgerListActivity" />
         <activity android:name=".AddActivity" />
-        <activity android:name=".LedgerActivity" >
-
-        </activity>
+        <activity android:name=".LedgerActivity" />
         <activity android:name=".MyPage"></activity>
         <activity android:name=".MyPage_WishList"/>
     </application>
