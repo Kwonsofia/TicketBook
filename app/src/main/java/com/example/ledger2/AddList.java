@@ -36,6 +36,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -199,6 +200,7 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
     }
 
     public void doTakeAlbumAction() { //카메라 촬영 후 이미지 가져오기
+
         Intent intent4 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         String url = "tmp_" + String.valueOf(System.currentTimeMillis()) + ".jpg";
@@ -258,7 +260,6 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
         }
     }
 
-
 //    private void storeCropImage(Bitmap photo, String filePath) {
 //        String dirPath=Environment.getExternalStorageDirectory().getAbsolutePath()+"/SmartWheel";
 //        File directory_SmartWheel=new File(dirPath);
@@ -275,7 +276,6 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
 //            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
 //        }
 //    }
-
 
     public void postFirebaseDatabase(boolean add) {
         mPostReference = FirebaseDatabase.getInstance().getReference();
