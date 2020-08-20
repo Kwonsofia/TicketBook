@@ -55,7 +55,7 @@ public class MyPage_WishList_Add extends AppCompatActivity {
 
                 Intent intent2 = new Intent(getBaseContext(), MyPage_WishList.class);
                 startActivity(intent2);
-                finish();
+
             }
         });
 
