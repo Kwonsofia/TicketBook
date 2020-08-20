@@ -61,6 +61,7 @@ public class LedgerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ledger);
 
+        //
 
         textMonth = findViewById(R.id.textMonth);
         textSum = findViewById(R.id.textSum);
