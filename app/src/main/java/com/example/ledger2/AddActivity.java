@@ -83,7 +83,7 @@ public class AddActivity extends AppCompatActivity implements SingleChoiceDialog
         });
     }
 
-    void showDate(){
+    public void showDate(){
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int mYear, int month, int dayOfMonth) {
