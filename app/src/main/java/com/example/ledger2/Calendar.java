@@ -31,7 +31,7 @@ public class Calendar extends AppCompatActivity {
         });
 
         ImageView calendar_page=(ImageView)findViewById(R.id.calendar_page);
-        ImageView ledger_page=(ImageView)findViewById(R.id.ledger_page);
+        ImageView ledger_page=(ImageView)findViewById(R.id.ledger);
         ImageView my_page = (ImageView)findViewById(R.id.my_page);
 
         //탭

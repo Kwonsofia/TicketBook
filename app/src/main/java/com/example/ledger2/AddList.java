@@ -25,6 +25,7 @@ import android.widget.TimePicker;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -52,16 +53,16 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
 
     //    String id;  //사용자 아이디
     String stitle;
-    int years;  //년도
-    int month;  //월
-    int date;  //일
+    String years;  //년도
+    String month;  //월
+    String date;  //일
     int hour;  //시간
     int min;  //분
     String pmam;  //오전오후
     String details;  //상세내용
     Bitmap imgUri;  //이미지
 
-    String sort="id";
+    String sort = "id";
 
     EditText title;
     EditText detail;
@@ -70,6 +71,7 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
 
     static ArrayList<String> arrayIndex = new ArrayList<String>();
     static ArrayList<String> arrayData = new ArrayList<String>();
+    public RecyclerView schedule;
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -85,10 +87,8 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
         timePicker.setOnTimeChangedListener((TimePicker.OnTimeChangedListener) this);
 
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
-        ListView listView = (ListView) findViewById(R.id.schedule_list);
-        if(listView != null){
-            listView.setAdapter(arrayAdapter);
-        }
+        schedule = (RecyclerView) findViewById(R.id.schedule_list);
+
 
         //뒤로 가기
         ImageButton backButton = (ImageButton) findViewById(R.id.back);
@@ -157,11 +157,20 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
                         new DatePicker.OnDateChangedListener() {
                             @Override
                             public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                years = year;
-                                month = monthOfYear;
-                                date = dayOfMonth;
+                                years = String.format(String.valueOf(year));
+                                month = String.format(String.valueOf(monthOfYear));
+                                date = String.format(String.valueOf(dayOfMonth));
                             }
                         });
+
+                findViewById(R.id.save).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        years=String.format(String.valueOf(datePicker.getYear()));
+                        month=String.format(String.valueOf(datePicker.getMonth()+1));
+                        date=String.format(String.valueOf(datePicker.getDayOfMonth()));
+                    }
+                });
                 //시간
                 onTimeChanged(timePicker, hour, min);
 
@@ -187,6 +196,7 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
                 title.requestFocus();
                 title.setCursorVisible(true);
 
+                arrayAdapter.notifyDataSetChanged();
                 Intent intent2 = new Intent(getBaseContext(), Calendar.class);
                 startActivity(intent2);
                 finish();
@@ -300,14 +310,14 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     String key = postSnapshot.getKey();
                     Schedule get = postSnapshot.getValue(Schedule.class);
-                    String[] info = {get.title, String.valueOf(get.year), String.valueOf(get.month),
-                            String.valueOf(get.date), String.valueOf(get.hour), String.valueOf(get.min), get.detail};
+                    String[] info = {get.title, get.year, get.month, get.date,
+                            String.valueOf(get.hour), String.valueOf(get.min), get.detail};
                     String Result = setTextLength(info[0], 10) + setTextLength(info[1], 10) + setTextLength(info[2], 10) +
                             setTextLength(info[3], 10) + setTextLength(info[4], 10) + setTextLength(info[5], 10) + setTextLength(info[6], 10);
                     arrayData.add(Result);
                     arrayIndex.add(key);
-                    Log.d("getFirebaseDatabase", "key: "+key);
-                    Log.d("getFirebaseDatabase", "info: "+info[0]+ info[1]+info[2]+info[3]+info[4]+info[5]+info[6]);
+                    Log.d("getFirebaseDatabase", "key: " + key);
+                    Log.d("getFirebaseDatabase", "info: " + info[0] + info[1] + info[2] + info[3] + info[4] + info[5] + info[6]);
                 }
                 arrayAdapter.clear();
                 arrayAdapter.addAll(arrayData);
@@ -319,7 +329,7 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
                 Log.w("getFirebaseDatabase", "loadPost:onCancelled", databaseError.toException());
             }
         };
-        Query sortbyAge=FirebaseDatabase.getInstance().getReference().child("id_list").orderByChild(sort);
+        Query sortbyAge = FirebaseDatabase.getInstance().getReference().child("id_list").orderByChild(sort);
         sortbyAge.addListenerForSingleValueEvent(postListener);
     }
 

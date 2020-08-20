@@ -12,25 +12,24 @@ import java.util.Map;
 public class Schedule {
     public String id;  //사용자 아이디
     public String title;
-    public int year;  //년도
-    public int month;  //월
-    public int date;  //일
+    public String year;  //년도
+    public String month;  //월
+    public String date;  //일
     //    public int expense; //지출
 //    public String userid;
 //    public String userName;
 //    public String location;
     public int hour;
     public int min;
-    public String pmam;
     public String detail;
-    public Bitmap imgUri;
+//    public Bitmap imgUri;
 
     Schedule() {
 //        String id;
         String title;
-        int year;
-        int month;
-        int date;
+        String year;
+        String month;
+        String date;
         int hour;
         int min;
         String pmam;
@@ -38,7 +37,7 @@ public class Schedule {
         Bitmap imgUri;
     }
 
-    Schedule(String title, int year, int month, int date, int hour, int min, String detail) {
+    Schedule(String title, String year, String month, String date, int hour, int min, String detail) {
 //        this.id = id;
         this.title = title;
         this.year = year;
@@ -57,15 +56,15 @@ public class Schedule {
         return title;
     }
 
-    int getYear() {
+    String getYear() {
         return year;
     }
 
-    int getMonth() {
+    String getMonth() {
         return month;
     }
 
-    int getDate() {
+    String getDate() {
         return date;
     }
 
@@ -77,19 +76,13 @@ public class Schedule {
         return min;
     }
 
-    String getPmam() {
-        return pmam;
-    }
-
-    ;
-
     String getDetail() {
         return detail;
     }
 
-    Bitmap getImgUri() {
-        return imgUri;
-    }
+//    Bitmap getImgUri() {
+//        return imgUri;
+//    }
 
     void setId(String id) {
         this.id = id;
@@ -99,15 +92,15 @@ public class Schedule {
         this.title = title;
     }
 
-    void setYear(int year) {
+    void setYear(String year) {
         this.year = year;
     }
 
-    void setMonth(int month) {
+    void setMonth(String month) {
         this.month = month;
     }
 
-    void setDate(int date) {
+    void setDate(String date) {
         this.date = date;
     }
 
@@ -119,17 +112,17 @@ public class Schedule {
         this.min = min;
     }
 
-    void setPmAm(String pmam) {
-        this.pmam = pmam;
-    }
+//    void setPmAm(String pmam) {
+//        this.pmam = pmam;
+//    }
 
     void setDetail(String detail) {
         this.detail = detail;
     }
 
-    void setImgUri(Bitmap imgUri) {
-        this.imgUri = imgUri;
-    }
+//    void setImgUri(Bitmap imgUri) {
+//        this.imgUri = imgUri;
+//    }
 
     @Exclude
     public Map<String, Object> toMap() {
