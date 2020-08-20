@@ -23,7 +23,7 @@ public class Calendar extends AppCompatActivity {
 
         ImageButton addButton=(ImageButton)findViewById(R.id.add);
         addButton.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View view) {
+            public void onClick(View view) {  //추가
                 Intent intent = new Intent(getBaseContext(), AddList.class);
                 startActivity(intent);
                 finish();
@@ -34,6 +34,7 @@ public class Calendar extends AppCompatActivity {
         ImageView ledger_page=(ImageView)findViewById(R.id.ledger_page);
         ImageView my_page = (ImageView)findViewById(R.id.my_page);
 
+        //탭
         calendar_page.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
