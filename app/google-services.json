@@ -8,18 +8,18 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:452338812235:android:bd6478bad7879e3be354ce",
+        "mobilesdk_app_id": "1:452338812235:android:84933ffca11c2627e354ce",
         "android_client_info": {
           "package_name": "com.example.ledger2"
         }
       },
       "oauth_client": [
         {
-          "client_id": "452338812235-jiqg0ojjgstnghts64p2f05hhnn83jbk.apps.googleusercontent.com",
+          "client_id": "452338812235-d46l1k4qtppgkdhniul26gdibc5k2uh4.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.ledger2",
-            "certificate_hash": "4a07a8f54e97aa2b97ff4c75ba523d7192886a7b"
+            "certificate_hash": "9869adee38f15ef4a3e0af0198b8d3375e63dd22"
           }
         },
         {
