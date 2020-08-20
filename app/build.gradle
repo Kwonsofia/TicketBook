@@ -50,4 +50,7 @@ dependencies {
     //권한에 대한 허용을 사용자로부터 받기 위함
     implementation "gun0912.ted:tedpermission:2.1.0"
 
+    implementation 'com.github.bumptech.glide:glide:3.8.0'
+    implementation 'com.zhihu.android:matisse:0.5.2-beta4'
+
 }
