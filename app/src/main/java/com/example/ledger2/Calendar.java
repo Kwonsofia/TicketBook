@@ -32,18 +32,29 @@ public class Calendar extends AppCompatActivity {
 
         ImageView calendar_page=(ImageView)findViewById(R.id.calendar_page);
         ImageView ledger_page=(ImageView)findViewById(R.id.ledger_page);
+        ImageView my_page = (ImageView)findViewById(R.id.my_page);
 
         calendar_page.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent calendar=new Intent(getBaseContext(), Calendar.class);
+                Intent intent_one = new Intent(Calendar.this, Calendar.class);
+                Calendar.this.startActivity(intent_one);
             }
         });
 
         ledger_page.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent ledger=new Intent(getBaseContext(), LedgerActivity.class);
+                Intent intent_two = new Intent(Calendar.this, LedgerActivity.class);
+                Calendar.this.startActivity(intent_two);
+            }
+        });
+
+        my_page.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent_three = new Intent(Calendar.this, MyPage.class);
+                Calendar.this.startActivity(intent_three);
             }
         });
     }
