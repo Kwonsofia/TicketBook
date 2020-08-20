@@ -62,7 +62,7 @@ public class MyPage_WishList extends AppCompatActivity {
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) { // 반복문으로 List 추출
                     MyPage_WishList_User2 item = snapshot.getValue(MyPage_WishList_User2.class); //만들어졌던 Ledger 객체에 데이터를 담음
-                    String str = item.getWorkname().substring(0,7);
+                    //String str = item.getWorkname().substring(0,7);
                     arrayList.add(item);
                 }
 
