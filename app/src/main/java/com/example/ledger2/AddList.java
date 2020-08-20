@@ -26,6 +26,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -67,14 +69,19 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
     EditText detail;
 
     ArrayAdapter<String> arrayAdapter;
+    FirebaseAuth mFirebaseAuth;
+    FirebaseUser mFirebaseUser;
 
     static ArrayList<String> arrayIndex = new ArrayList<String>();
-    static ArrayList<String> arrayData = new ArrayList<String>();
+    static ArrayList<String> arraySchedule = new ArrayList<String>();
 
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_list);
+
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
         title = (EditText) findViewById(R.id.title);
         final DatePicker datePicker = (DatePicker) findViewById(R.id.datePicker);
@@ -278,7 +285,7 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
 
 
     public void postFirebaseDatabase(boolean add) {
-        mPostReference = FirebaseDatabase.getInstance().getReference();
+        mPostReference = FirebaseDatabase.getInstance().getReference(mFirebaseUser.getUid()+"/Calendar");
         Map<String, Object> childUpdates = new HashMap<>();
         Map<String, Object> scheduleValues = null;
         if (add) {
@@ -295,7 +302,7 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Log.e("getFirebaseDatabase", "key: " + dataSnapshot.getChildrenCount());
-                arrayData.clear();
+                arraySchedule.clear();
                 arrayIndex.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     String key = postSnapshot.getKey();
@@ -304,13 +311,13 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
                             String.valueOf(get.date), String.valueOf(get.hour), String.valueOf(get.min), get.detail};
                     String Result = setTextLength(info[0], 10) + setTextLength(info[1], 10) + setTextLength(info[2], 10) +
                             setTextLength(info[3], 10) + setTextLength(info[4], 10) + setTextLength(info[5], 10) + setTextLength(info[6], 10);
-                    arrayData.add(Result);
+                    arraySchedule.add(Result);
                     arrayIndex.add(key);
                     Log.d("getFirebaseDatabase", "key: "+key);
                     Log.d("getFirebaseDatabase", "info: "+info[0]+ info[1]+info[2]+info[3]+info[4]+info[5]+info[6]);
                 }
                 arrayAdapter.clear();
-                arrayAdapter.addAll(arrayData);
+                arrayAdapter.addAll(arraySchedule);
                 arrayAdapter.notifyDataSetChanged();
             }
 
