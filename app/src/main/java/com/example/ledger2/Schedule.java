@@ -26,7 +26,7 @@ public class Schedule {
     public Bitmap imgUri;
 
     Schedule() {
-        String id;
+//        String id;
         String title;
         int year;
         int month;
@@ -38,17 +38,15 @@ public class Schedule {
         Bitmap imgUri;
     }
 
-    Schedule(String id, String title, int year, int month, int date, int hour, int min, String pmam, String detail, Bitmap imgUri) {
-        this.id = id;
+    Schedule(String title, int year, int month, int date, int hour, int min, String detail) {
+//        this.id = id;
         this.title = title;
         this.year = year;
         this.month = month;
         this.date = date;
         this.hour = hour;
         this.min = min;
-        this.pmam = pmam;
         this.detail = detail;
-        this.imgUri = imgUri;
     }
 
     String getId() {
@@ -136,16 +134,14 @@ public class Schedule {
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
-        result.put("id", id);
+//        result.put("id", id);
         result.put("title", title);
         result.put("year", year);
         result.put("month", month);
         result.put("date", date);
         result.put("hour", hour);
         result.put("min", min);
-        result.put("pmam", pmam);
         result.put("detail", detail);
-        result.put("imgUri", imgUri);
         return result;
     }
 }
