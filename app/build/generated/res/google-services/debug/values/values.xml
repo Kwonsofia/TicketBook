@@ -4,7 +4,7 @@
     <string name="firebase_database_url" translatable="false">https://ledger2-3da43.firebaseio.com</string>
     <string name="gcm_defaultSenderId" translatable="false">452338812235</string>
     <string name="google_api_key" translatable="false">AIzaSyAAiIT3gEKk38DlQX80v_Rrg9a49YPNIHo</string>
-    <string name="google_app_id" translatable="false">1:452338812235:android:bd6478bad7879e3be354ce</string>
+    <string name="google_app_id" translatable="false">1:452338812235:android:84933ffca11c2627e354ce</string>
     <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAAiIT3gEKk38DlQX80v_Rrg9a49YPNIHo</string>
     <string name="google_storage_bucket" translatable="false">ledger2-3da43.appspot.com</string>
     <string name="project_id" translatable="false">ledger2-3da43</string>
