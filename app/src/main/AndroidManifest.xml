@@ -14,18 +14,19 @@
         android:theme="@style/AppTheme">
         <activity android:name=".LoginActivity"></activity>
         <activity android:name=".SubMainActivity">
-        </activity>
-        <activity android:name=".Calendar">
-        </activity>
-        <activity android:name=".AddList">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Calendar">
+        </activity>
+        <activity android:name=".AddList">
+
+        </activity>
         <activity android:name=".LedgerListActivity" />
         <activity android:name=".AddActivity" />
-        <activity android:name=".LedgerActivity" />
+        <activity android:name=".LedgerActivity" ></activity>
         <activity android:name=".MyPage"></activity>
         <activity android:name=".MyPage_WishList"/>
     </application>

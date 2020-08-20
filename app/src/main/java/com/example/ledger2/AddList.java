@@ -86,7 +86,9 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
 
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
         ListView listView = (ListView) findViewById(R.id.schedule_list);
-        listView.setAdapter(arrayAdapter);
+        if(listView != null){
+            listView.setAdapter(arrayAdapter);
+        }
 
         //뒤로 가기
         ImageButton backButton = (ImageButton) findViewById(R.id.back);
