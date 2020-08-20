@@ -36,6 +36,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -61,7 +62,7 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
     String details;  //상세내용
     Bitmap imgUri;  //이미지
 
-    String sort="id";
+    String sort = "id";
 
     EditText title;
     EditText detail;
@@ -86,7 +87,7 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
 
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
         ListView listView = (ListView) findViewById(R.id.schedule_list);
-        if(listView != null){
+        if (listView != null) {
             listView.setAdapter(arrayAdapter);
         }
 
@@ -107,7 +108,7 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
         imageAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent3 = new Intent(getBaseContext(), AddList.class);
+                Intent intent3 = new Intent(getApplicationContext(), AddList.class);
                 startActivity(intent3);
                 finish();
 
@@ -199,6 +200,7 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
     }
 
     public void doTakeAlbumAction() { //카메라 촬영 후 이미지 가져오기
+
         Intent intent4 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         String url = "tmp_" + String.valueOf(System.currentTimeMillis()) + ".jpg";
@@ -258,7 +260,6 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
         }
     }
 
-
 //    private void storeCropImage(Bitmap photo, String filePath) {
 //        String dirPath=Environment.getExternalStorageDirectory().getAbsolutePath()+"/SmartWheel";
 //        File directory_SmartWheel=new File(dirPath);
@@ -275,7 +276,6 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
 //            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
 //        }
 //    }
-
 
     public void postFirebaseDatabase(boolean add) {
         mPostReference = FirebaseDatabase.getInstance().getReference();
@@ -306,8 +306,8 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
                             setTextLength(info[3], 10) + setTextLength(info[4], 10) + setTextLength(info[5], 10) + setTextLength(info[6], 10);
                     arrayData.add(Result);
                     arrayIndex.add(key);
-                    Log.d("getFirebaseDatabase", "key: "+key);
-                    Log.d("getFirebaseDatabase", "info: "+info[0]+ info[1]+info[2]+info[3]+info[4]+info[5]+info[6]);
+                    Log.d("getFirebaseDatabase", "key: " + key);
+                    Log.d("getFirebaseDatabase", "info: " + info[0] + info[1] + info[2] + info[3] + info[4] + info[5] + info[6]);
                 }
                 arrayAdapter.clear();
                 arrayAdapter.addAll(arrayData);
@@ -319,7 +319,7 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
                 Log.w("getFirebaseDatabase", "loadPost:onCancelled", databaseError.toException());
             }
         };
-        Query sortbyAge=FirebaseDatabase.getInstance().getReference().child("id_list").orderByChild(sort);
+        Query sortbyAge = FirebaseDatabase.getInstance().getReference().child("id_list").orderByChild(sort);
         sortbyAge.addListenerForSingleValueEvent(postListener);
     }
 
