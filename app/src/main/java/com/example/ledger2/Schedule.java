@@ -38,7 +38,7 @@ public class Schedule {
         Bitmap imgUri;
     }
 
-    Schedule(String title, int year, int month, int date, int hour, int min, String pmam, String detail, Bitmap imgUri) {
+    Schedule(String title, int year, int month, int date, int hour, int min, String detail) {
 //        this.id = id;
         this.title = title;
         this.year = year;
@@ -46,9 +46,7 @@ public class Schedule {
         this.date = date;
         this.hour = hour;
         this.min = min;
-        this.pmam = pmam;
         this.detail = detail;
-        this.imgUri = imgUri;
     }
 
     String getId() {
@@ -143,9 +141,7 @@ public class Schedule {
         result.put("date", date);
         result.put("hour", hour);
         result.put("min", min);
-        result.put("pmam", pmam);
         result.put("detail", detail);
-        result.put("imgUri", imgUri);
         return result;
     }
 }

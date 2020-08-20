@@ -281,7 +281,7 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
         Map<String, Object> scheduleValues = null;
         if (add) {
             Schedule schedule =
-                    new Schedule(stitle, years, month, date, hour, min, pmam, details, imgUri);
+                    new Schedule(stitle, years, month, date, hour, min, details);
             scheduleValues = schedule.toMap();
         }
         childUpdates.put(stitle, scheduleValues);
