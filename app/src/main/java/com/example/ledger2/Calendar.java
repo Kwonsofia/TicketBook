@@ -23,7 +23,7 @@ public class Calendar extends AppCompatActivity {
 
         ImageButton addButton=(ImageButton)findViewById(R.id.add);
         addButton.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View view) {  //추가하기
+            public void onClick(View view) {  //추가
                 Intent intent = new Intent(getBaseContext(), AddList.class);
                 startActivity(intent);
                 finish();
