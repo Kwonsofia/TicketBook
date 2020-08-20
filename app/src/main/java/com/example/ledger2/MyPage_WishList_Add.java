@@ -31,6 +31,7 @@ public class MyPage_WishList_Add extends AppCompatActivity {
     EditText edit_wish_memo;
     ImageButton image_wish_poster;
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,55 +71,6 @@ public class MyPage_WishList_Add extends AppCompatActivity {
 
 } //Class  -   MyPage_WishList_Add
 
-@IgnoreExtraProperties
-class MyPage_WishList_User2 {
-
-    public int workId=0;
-    public String workname;
-    public String memo;
-    public Image poster;
-
-
-    public MyPage_WishList_User2() {
-        // Default constructor required for calls to DataSnapshot.getValue(User.class)
-    }
-
-    public MyPage_WishList_User2(int workID, String workname, String memo, Image poster) {
-        this.workId = workID;
-        this.workname = workname;
-        this.memo = memo;
-        this.poster = poster;
-    }
-
-
-
-    /*---------------get--------------*/
-    public int getWorkId(){
-        return workId;
-    }
-    public String getWorkname(){
-        return workname;
-    }
-    public String getMemo(){
-        return memo;
-    }
-    public Image getPoster(){
-        return poster;
-    }
-    /*---------------set--------------*/
-    public void setWorkId(int workId) {
-        this.workId = workId;
-    }
-    public void setWorkname(String workname) {
-        this.workname = workname;
-    }
-    public void setMemo(String memo) {
-        this.memo = memo;
-    }
-    public void setPoster(Image poster) {
-        this.poster = poster;
-    }
-} //Class  -   MyPage_WishList_User2
 
 
 
