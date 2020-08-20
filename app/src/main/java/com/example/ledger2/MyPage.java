@@ -144,13 +144,11 @@ public class MyPage extends AppCompatActivity implements NavigationView.OnNaviga
                 Intent intent = new Intent(getBaseContext(), Calendar.class);
                // navigationView.setCheckedItem(R.id.home);
                 startActivity(intent);
-                finish();
                 break;
             case R.id.wishlist:
                 Intent intent_wish = new Intent(getBaseContext(), MyPage_WishList.class);
                 //navigationView.setCheckedItem(R.id.wishlist);
                 startActivity(intent_wish);
-                finish();
                 break;
             case R.id.logout:
                 Toast.makeText(this, "로그아웃되었습니다.", Toast.LENGTH_SHORT).show();
@@ -158,7 +156,6 @@ public class MyPage extends AppCompatActivity implements NavigationView.OnNaviga
                 Intent intent_logout = new Intent(getBaseContext(), LoginActivity.class);
                // navigationView.setCheckedItem(R.id.logout);
                 startActivity(intent_logout);
-                finish();
                 break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);
