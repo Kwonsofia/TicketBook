@@ -40,6 +40,12 @@
                 android:layout_marginTop="5dp"
                  />
 
+            <TextView
+                android:id="@+id/wish_hidden_key"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="invisible"/>
+
 
         </LinearLayout>
 
