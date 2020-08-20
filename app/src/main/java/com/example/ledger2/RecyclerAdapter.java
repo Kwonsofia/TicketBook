@@ -15,6 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -88,6 +90,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         TextView title;
         TextView price;
         TextView key;
+        FirebaseAuth mFirebaseAuth;
+        FirebaseUser mFirebaseUser;
 
         public RecyclerViewHolder(@NonNull final View itemView){
             super(itemView);
@@ -99,6 +103,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
             this.title = itemView.findViewById(R.id.textView_title);
             this.price = itemView.findViewById(R.id.textView_price);
             key = itemView.findViewById(R.id.hidden_key);
+            mFirebaseAuth = FirebaseAuth.getInstance();
+            mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -117,7 +123,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
                             switch (item.getItemId()){
                                 case R.id.delete:
                                         database
-                                                .getReference("Ledger/"+selectedKey)
+                                                .getReference(mFirebaseUser.getUid()+"/Ledger/"+selectedKey)
                                                 .removeValue(new DatabaseReference.CompletionListener() {
                                                     @Override
                                                     public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {

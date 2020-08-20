@@ -56,12 +56,20 @@ public class LedgerActivity extends AppCompatActivity {
 
     String getTime;
 
+    FirebaseAuth mFirebaseAuth;
+    FirebaseUser mFirebaseUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ledger);
 
-        //
+        // 인증정보 받아오기....!!!
+
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseUser = mFirebaseAuth.getCurrentUser();
+
+
 
         textMonth = findViewById(R.id.textMonth);
         textSum = findViewById(R.id.textSum);
@@ -89,7 +97,7 @@ public class LedgerActivity extends AppCompatActivity {
         textMonth.setText(getTime);
 
 
-        databaseReference = database.getReference("Ledger"); // DB 테이블 연결
+        databaseReference = database.getReference(mFirebaseUser.getUid()+"/Ledger"); // DB 테이블 연결
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -299,7 +307,7 @@ public class LedgerActivity extends AppCompatActivity {
 
 
 
-            database.getReference("Ledger/"+key).setValue(memo);
+            database.getReference(mFirebaseUser.getUid()+"/Ledger/"+key).setValue(memo);
 
 //            database.getReference("Ledger")
 //                    .push()

@@ -142,14 +142,16 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="취소" />
+                android:text="취소"
+                android:theme="@style/ButtonStyle"/>
 
             <Button
                 android:id="@+id/submit_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="완료" />
+                android:text="완료"
+                android:theme="@style/ButtonStyle"/>
 
         </LinearLayout>
 

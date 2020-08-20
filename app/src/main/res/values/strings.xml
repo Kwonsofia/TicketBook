@@ -1,11 +1,11 @@
 <resources>
-    <string name="app_name">TicketBook</string>
+    <string name="app_name">문화생활\n기록부</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="signin_email">Signin</string>
-    <string name="join_email">Signupby email</string>
+    <string name="join_email">Signup by email</string>
     <string name="signin_google">Google login</string>
 </resources>
