@@ -2,14 +2,11 @@ package com.example.ledger2;
 
 import android.content.Context;
 import android.media.Image;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
@@ -52,9 +49,6 @@ public class MyPage_RecyclerAdapter extends RecyclerView.Adapter<MyPage_Recycler
         holder.title.setText(worksname);
         holder.memo.setText((CharSequence) worksmemo);
         holder.key.setText(workskey);
-        Glide.with(holder.itemView)
-                .load(arrayList.get(position).getPoster())
-                .into(holder.image);
 
     }
 
@@ -63,7 +57,6 @@ public class MyPage_RecyclerAdapter extends RecyclerView.Adapter<MyPage_Recycler
         TextView title;
         TextView memo;
         TextView key;
-        ImageView image;
         //Image poster;
 //        FirebaseAuth mFirebaseAuth;
 //        FirebaseUser mFirebaseUser;
@@ -74,7 +67,6 @@ public class MyPage_RecyclerAdapter extends RecyclerView.Adapter<MyPage_Recycler
             this.title = itemView.findViewById(R.id.wishcontent_title);
             this.memo = itemView.findViewById(R.id.wishcontent_memo);
             this.key = itemView.findViewById(R.id.wish_hidden_key);
-            this.image = itemView.findViewById(R.id.wishcontent_poster);
 
 
 //            mFirebaseAuth = FirebaseAuth.getInstance();
@@ -88,5 +80,4 @@ public class MyPage_RecyclerAdapter extends RecyclerView.Adapter<MyPage_Recycler
         return (arrayList != null ? arrayList.size(): 0);
     }
 }
-
 

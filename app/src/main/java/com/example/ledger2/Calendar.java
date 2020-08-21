@@ -1,7 +1,6 @@
 package com.example.ledger2;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -66,8 +65,8 @@ public class Calendar extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {  //추가
                 Intent intent = new Intent(getBaseContext(), AddList.class);
-                startActivityForResult(intent,3);
-//                finish();
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -172,30 +171,7 @@ public class Calendar extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == 3) {
-            String title = data.getStringExtra("title");
-            String date = data.getStringExtra("date");
-            String time = data.getStringExtra("time");
-            String content = data.getStringExtra("content");
-            String imageuri = data.getStringExtra("uri");
-            //Image poster = data.
-
-            String key = date;//
-
-            Schedule works = new Schedule(key, title,date, time, content,imageuri);
-
-            database.getReference(mFirebaseUser.getUid()+"/Calendar/"+key).setValue(works);
-
-        }
-
-
-    }
-
-    //    private String setTextLength(String s, int i) {
+//    private String setTextLength(String s, int i) {
 //        if (text.length() < length) {
 //            int gap = length - text.length();
 //            for (int i = 0; i < gap; i++) {
