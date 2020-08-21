@@ -62,8 +62,8 @@ public class Calendar extends AppCompatActivity {
         scheduleList.setLayoutManager(layoutManager);
 
         //추가 버튼
-        ImageButton addButton=(ImageButton)findViewById(R.id.add);
-        addButton.setOnClickListener(new View.OnClickListener(){
+        ImageButton addButton = (ImageButton) findViewById(R.id.add);
+        addButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {  //추가
 //                Intent intent = new Intent(getBaseContext(), AddList.class);
 //                startActivity(intent);
@@ -73,8 +73,8 @@ public class Calendar extends AppCompatActivity {
             }
         });
 
-        CalendarView calendar=(CalendarView)findViewById(R.id.calendar);
-        scheduleReference = database.getReference(mFirebaseUser.getUid()+"/Calendar"); // DB 테이블 연결
+        CalendarView calendar = (CalendarView) findViewById(R.id.calendar);
+        scheduleReference = database.getReference(mFirebaseUser.getUid() + "/Calendar"); // DB 테이블 연결
         scheduleReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -83,7 +83,7 @@ public class Calendar extends AppCompatActivity {
 
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) { // 반복문으로 List 추출
-                    Schedule list=snapshot.getValue(Schedule.class);
+                    Schedule list = snapshot.getValue(Schedule.class);
                     String date = list.getDate();
                     arrayLists.add(list);
 //                    if(cDate.equals(date)){
@@ -103,14 +103,11 @@ public class Calendar extends AppCompatActivity {
         });
 
 
-
-
-
-        CalendarView myCalendar=(CalendarView)findViewById(R.id.calendar);
+        CalendarView myCalendar = (CalendarView) findViewById(R.id.calendar);
         myCalendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int dayOfMonth) {
-                cDate=year+"-"+(month+1)+"-"+dayOfMonth;
+                cDate = year + "-" + (month + 1) + "-" + dayOfMonth;
                 Log.d("C_DATE", cDate);
             }
         });
@@ -120,9 +117,9 @@ public class Calendar extends AppCompatActivity {
         scheduleList.setAdapter(scheduleAdapter);
 
 
-        ImageView calendar_page=(ImageView)findViewById(R.id.calendar_page);
-        ImageView ledger_page=(ImageView)findViewById(R.id.ledger);
-        ImageView my_page = (ImageView)findViewById(R.id.my_page);
+        ImageView calendar_page = (ImageView) findViewById(R.id.calendar_page);
+        ImageView ledger_page = (ImageView) findViewById(R.id.ledger);
+        ImageView my_page = (ImageView) findViewById(R.id.my_page);
 
         //탭
         calendar_page.setOnClickListener(new View.OnClickListener() {
@@ -136,7 +133,7 @@ public class Calendar extends AppCompatActivity {
         ledger_page.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent_two= new Intent(Calendar.this, LedgerActivity.class);
+                Intent intent_two = new Intent(Calendar.this, LedgerActivity.class);
                 Calendar.this.startActivity(intent_two);
             }
         });
@@ -173,6 +170,7 @@ public class Calendar extends AppCompatActivity {
         };
 
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -188,9 +186,9 @@ public class Calendar extends AppCompatActivity {
 
             String key = date;//
 
-            Schedule works = new Schedule(key,title,date,time,content,url);
+            Schedule works = new Schedule(key, title, date, time, content, url);
 
-            database.getReference(mFirebaseUser.getUid()+"/Calendar/"+key).setValue(works);
+            database.getReference(mFirebaseUser.getUid() + "/Calendar/" + key).setValue(works);
 
         }
     }

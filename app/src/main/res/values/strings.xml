@@ -8,4 +8,14 @@
     <string name="signin_email">Signin</string>
     <string name="join_email">Signup by email</string>
     <string name="signin_google">Google login</string>
+    <string name="add_transaction">Add Transaction</string>
+    <string name="category_add">카테고리</string>
+    <string name="charge">금액</string>
+    <string name="detail_content">상세 내역</string>
+    <string name="cancle">취소</string>
+    <string name="finish">완료</string>
+    <string name="content">내용</string>
+    <string name="time">시간</string>
+    <string name="date">날짜</string>
+    <string name="title">제목</string>
 </resources>

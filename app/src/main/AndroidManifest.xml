@@ -20,9 +20,13 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity android:name=".ScheduleList"></activity>
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".LoginActivity">
+
+
+        </activity>
         <activity android:name=".Calendar">
         </activity>
         <activity android:name=".AddList"></activity>
@@ -31,7 +35,10 @@
         <activity android:name=".LedgerActivity">
 
         </activity>
-        <activity android:name=".MyPage"></activity>
+        <activity android:name=".MyPage">
+
+
+        </activity>
         <activity android:name=".MyPage_WishList">
         </activity>
         <activity android:name=".MyPage_WishList_Add"></activity>
