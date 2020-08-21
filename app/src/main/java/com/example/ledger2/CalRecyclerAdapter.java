@@ -7,6 +7,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseError;
@@ -57,24 +59,37 @@ public class CalRecyclerAdapter extends RecyclerView.Adapter<CalRecyclerAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
-        String title = arrayList.get(position).getTitle();
+        String title =arrayList.get(position).getTitle();
         String date = arrayList.get(position).getDate();
+        String time = arrayList.get(position).getTime();
+        String content = arrayList.get(position).getDetail();
+        String key = arrayList.get(position).getId();
 
-        holder.titles.setText(title);
-        holder.date.setText((CharSequence) date);
+        holder.title01.setText(title);
+        holder.date01.setText((CharSequence) date);
+        holder.time01.setText(time);
+        holder.content01.setText((CharSequence) content);
+        holder.key01.setText(key);
+        Glide.with(holder.itemView)
+                .load(arrayList.get(position).getImgUri())
+                .into(holder.imageView01);
+
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return (arrayList != null ? arrayList.size(): 0);
     }
 
 
     class RecyclerViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
-        TextView titles;
-        TextView date;
-        TextView key;
+        ImageView imageView01;
+        TextView title01;
+        TextView date01;
+        TextView time01;
+        TextView content01;
+        TextView key01;
         //Image poster;
         FirebaseAuth mFirebaseAuth;
         FirebaseUser mFirebaseUser;
@@ -82,14 +97,17 @@ public class CalRecyclerAdapter extends RecyclerView.Adapter<CalRecyclerAdapter.
         public RecyclerViewHolder(@NonNull final View itemView) {
             super(itemView);
 
-            this.titles = itemView.findViewById(R.id.schedule_title);
-            this.date = itemView.findViewById(R.id.schedule_date);
-            key=itemView.findViewById(R.id.schedule_key);
+            imageView01 = itemView.findViewById(R.id.schedule_image);
+            title01 = itemView.findViewById(R.id.schedule_title);
+            date01 = itemView.findViewById(R.id.schedule_date);
+            time01 = itemView.findViewById(R.id.schedule_time);
+            content01 = itemView.findViewById(R.id.schedule_content);
+            key01 = itemView.findViewById(R.id.schedule_key);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(final View v) {
-                    selectedKey = key.getText().toString();
+                    selectedKey = key01.getText().toString();
 
                     // PopupMenu 객체 생성
                     PopupMenu popup = new PopupMenu(context, v);
@@ -103,7 +121,7 @@ public class CalRecyclerAdapter extends RecyclerView.Adapter<CalRecyclerAdapter.
                             switch (item.getItemId()) {
                                 case R.id.delete:
                                     database
-                                            .getReference(mFirebaseUser.getUid() + "/Ledger/" + selectedKey)
+                                            .getReference(mFirebaseUser.getUid() + "/Calendar/" + selectedKey)
                                             .removeValue(new DatabaseReference.CompletionListener() {
                                                 @Override
                                                 public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {

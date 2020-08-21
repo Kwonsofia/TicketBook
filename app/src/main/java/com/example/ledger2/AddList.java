@@ -178,8 +178,21 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
                 title.requestFocus();
                 title.setCursorVisible(true);
 
-                Intent intent2 = new Intent(getBaseContext(), Calendar.class);
-                startActivity(intent2);
+//                Intent intent2 = new Intent(getBaseContext(), Calendar.class);
+//                startActivity(intent2);
+//                finish();
+
+                Intent intent = new Intent();
+                intent.putExtra("title", stitle);
+                intent.putExtra("date", sdate.getText().toString());
+                intent.putExtra("time","모름.");
+                intent.putExtra("content",details);
+                intent.putExtra("uri","몰라이");
+
+                setResult(3, intent);
+
+//                Intent intent2 = new Intent(getBaseContext(), MyPage_WishList.class);
+//                startActivity(intent2);
                 finish();
             }
         });
@@ -236,7 +249,7 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
         Map<String, Object> scheduleValues = null;
         if (add) {
             Schedule schedule =
-                    new Schedule(id, stitle, date_set, hour, min, details, Uri.fromFile(f).toString());
+                    new Schedule(id, stitle, date_set, "상", details, Uri.fromFile(f).toString());
             scheduleValues = schedule.toMap();
         }
         childUpdates.put(stitle, scheduleValues);
