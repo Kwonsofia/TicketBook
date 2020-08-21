@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorWhite"
     tools:context=".AddActivity">
 
     <LinearLayout
@@ -23,15 +24,14 @@
             android:text="@string/add_transaction"
             android:textColor="#000000"
             android:textSize="30dp"
-            android:textStyle="bold"
-            app:layout_anchor="@+id/linearLayout"/>
+            android:textStyle="bold" />
 
     </LinearLayout>
 
     <View
         android:layout_width="wrap_content"
         android:layout_height="2dp"
-        android:background="@android:color/darker_gray" />
+        android:background="#000000" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -54,11 +54,12 @@
                 android:layout_marginStart="10dp"
                 android:layout_weight="5">
 
+
                 <EditText
                     android:id="@+id/input_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="날짜" />
+                    android:hint="@string/date" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <ImageView
@@ -153,9 +154,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
                 android:text="@string/finish"
-
                 android:textSize="18dp"
-
                 android:theme="@style/ButtonStyle2" />
 
         </LinearLayout>

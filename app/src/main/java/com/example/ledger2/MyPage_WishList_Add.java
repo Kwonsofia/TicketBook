@@ -68,9 +68,6 @@ public class MyPage_WishList_Add extends AppCompatActivity {
         edit_wish_memo = findViewById(R.id.wishlist_edit_memo);
         image_wish_poster = findViewById(R.id.image_add);
 
-//        database_wishlist = FirebaseDatabase.getInstance().getReference();
-//        //데이터베이스에서 데이터를 읽거나 쓰려면 DatabaseReference의 인스턴스가 필요합니다.
-
         image_wish_poster.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,18 +81,13 @@ public class MyPage_WishList_Add extends AppCompatActivity {
         button_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                upload(imagePath);
-//                String path = downloadUri==null?"":downloadUri.toString();
                 Intent intent = new Intent();
                 intent.putExtra("title", edit_wish_title.getText().toString());
                 intent.putExtra("memo", edit_wish_memo.getText().toString());
-                //intent.putExtra("poster", path);
-                //intent.putExtra("poster", image_wish_poster.getImageTintMode());
+
                 intent.putExtra("poster", Uri.fromFile(f).toString());
                 setResult(1, intent);
 
-//                Intent intent2 = new Intent(getBaseContext(), MyPage_WishList.class);
-//                startActivity(intent2);
                 finish();
 
             }

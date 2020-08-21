@@ -43,7 +43,7 @@ public class MyPage_TabOne_Musical extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.mypage_fragone_musical, container, false);
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.mypage_fragone_musical, container, false);
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
@@ -57,7 +57,7 @@ public class MyPage_TabOne_Musical extends Fragment {
         recyclerView_fragone.setAdapter(adapter);
         database = FirebaseDatabase.getInstance();
 
-        databaseReference = database.getReference(mFirebaseUser.getUid()+"/Calendar"); // DB 테이블 연결
+        databaseReference = database.getReference(mFirebaseUser.getUid() + "/Calendar"); // DB 테이블 연결
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -68,8 +68,7 @@ public class MyPage_TabOne_Musical extends Fragment {
                     Schedule item = snapshot.getValue(Schedule.class);
                     String comp = item.getDetail();
 
-                    if(comp.equals("Musical")){
-                        //  Toast.makeText(getContext()," "+comp,Toast.LENGTH_LONG).show();
+                    if (comp.equals("Musical")) {
                         arrayList.add(item);
                     }
                     adapter.notifyDataSetChanged();
@@ -90,53 +89,5 @@ public class MyPage_TabOne_Musical extends Fragment {
         Log.e("Frag", "MainFragment");
         return rootView;
 
-
-        /*
-        View view = inflater.inflate(R.layout.mypage_fragone_musical, container, false);
-
-        mFirebaseAuth = FirebaseAuth.getInstance();
-        mFirebaseUser = mFirebaseAuth.getCurrentUser();
-
-        recyclerView_fragone = view.findViewById(R.id.recyclerView_fragone);
-
-        recyclerView_fragone.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(getActivity());
-        recyclerView_fragone.setLayoutManager(layoutManager);
-        arrayList = new ArrayList<>(); // Ledger 객체를 담을 arrayList
-
-        database = FirebaseDatabase.getInstance();
-
-        databaseReference = database.getReference(mFirebaseUser.getUid()+"/Calendar"); // DB 테이블 연결
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                // firebase database의 data를 받아오는 곳
-                arrayList.clear();
-
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) { // 반복문으로 List 추출
-                    Schedule item = snapshot.getValue(Schedule.class);
-                    String comp = item.getDetail();
-
-                    if(comp.equals("Musical")){
-                        Toast.makeText(getContext()," "+comp,Toast.LENGTH_LONG).show();
-                        arrayList.add(item);
-                    }
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // DB를 가져오던 중 error 발생 시
-                Log.d("MyPage", String.valueOf(databaseError.toException()));
-            }
-        });
-
-        adapter = new FragOne_RecyclerAdapter(arrayList);
-        recyclerView_fragone.setAdapter(adapter);
-
-        adapter.notifyDataSetChanged();
-
-        return view;*/
     }
 }

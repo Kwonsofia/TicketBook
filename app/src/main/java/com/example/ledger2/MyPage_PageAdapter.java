@@ -13,29 +13,22 @@ public class MyPage_PageAdapter extends FragmentStatePagerAdapter {
         this.counttab = counttab;
     }
 
-    //class 생성한 뒤에 바로 implement.
-    //Create constructor matching super
-
     @NonNull
     @Override
     public Fragment getItem(int position) {
         switch (position) {
             case 0: {
-                MyPage_TabOne_Musical myPageTaboneMusical = new MyPage_TabOne_Musical();
-                return myPageTaboneMusical;
+                return new MyPage_TabOne_Musical();
 
             }
             case 1: {
-                MyPage_TabTwo_Play myPageTabTwoPlay = new MyPage_TabTwo_Play();
-                return myPageTabTwoPlay;
+                return new MyPage_TabTwo_Play();
             }
             case 2: {
-                MyPage_TabThree_Exhibition myPageTabThreeExhibition = new MyPage_TabThree_Exhibition();
-                return myPageTabThreeExhibition;
+                return new MyPage_TabThree_Exhibition();
             }
             case 3: {
-                MyPage_TabFour_Etc myPageTabFourEtc = new MyPage_TabFour_Etc();
-                return myPageTabFourEtc;
+                return new MyPage_TabFour_Etc();
             }
             default:
                 return null;

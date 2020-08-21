@@ -19,15 +19,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class MyPage_RecyclerAdapter extends RecyclerView.Adapter<MyPage_RecyclerAdapter.RecyclerViewHolder> {
     private ArrayList<MyPage_WishList_User2> arrayList;
-    //private Context context;
-//    private FirebaseDatabase database;
-    //String selectedKey;
-
 
     public MyPage_RecyclerAdapter(ArrayList<MyPage_WishList_User2> arrayList) {
         this.arrayList = arrayList;
-        //this.context = context;
-        //this.database = database;
     }
 
     @NonNull
@@ -57,9 +51,6 @@ public class MyPage_RecyclerAdapter extends RecyclerView.Adapter<MyPage_Recycler
         TextView title;
         TextView memo;
         TextView key;
-        //Image poster;
-//        FirebaseAuth mFirebaseAuth;
-//        FirebaseUser mFirebaseUser;
 
         public RecyclerViewHolder(@NonNull final View itemView) {
             super(itemView);
@@ -67,10 +58,6 @@ public class MyPage_RecyclerAdapter extends RecyclerView.Adapter<MyPage_Recycler
             this.title = itemView.findViewById(R.id.wishcontent_title);
             this.memo = itemView.findViewById(R.id.wishcontent_memo);
             this.key = itemView.findViewById(R.id.wish_hidden_key);
-
-
-//            mFirebaseAuth = FirebaseAuth.getInstance();
-//            mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
         }
     }

@@ -186,12 +186,6 @@ public class LedgerActivity extends AppCompatActivity {
                         Log.d("LedgerActivity", String.valueOf(databaseError.toException()));
                     }
                 });
-
-
-//                recyclerAdapter = new RecyclerAdapter(memoList);
-//                recyclerView.setAdapter(recyclerAdapter);
-
-
             }
         });
 
@@ -242,9 +236,6 @@ public class LedgerActivity extends AppCompatActivity {
                         Log.d("LedgerActivity", String.valueOf(databaseError.toException()));
                     }
                 });
-
-//                recyclerAdapter = new RecyclerAdapter(memoList);
-//                recyclerView.setAdapter(recyclerAdapter);
             }
         });
 
@@ -266,9 +257,7 @@ public class LedgerActivity extends AppCompatActivity {
                 LedgerActivity.this.startActivity(intent_two);
             }
         });
-
     }
-
 
     // 총액 계산하기
     public void getSum(String month) {
@@ -301,10 +290,6 @@ public class LedgerActivity extends AppCompatActivity {
 
 
             database.getReference(mFirebaseUser.getUid() + "/Ledger/" + key).setValue(memo);
-
-//            database.getReference("Ledger")
-//                    .push()
-//                    .setValue(memo);
 
         }
     }
