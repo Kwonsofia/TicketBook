@@ -186,7 +186,7 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
                 //상세내용
                 details = detail.getText().toString();
 
-//                scheduleFirebaseDatabase(true);
+                scheduleFirebaseDatabase(true);
 
                 title.requestFocus();
                 title.setCursorVisible(true);
@@ -196,16 +196,16 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
 //                finish();
 
 
-                if(f==null){
-                    f = new File(imagePath);
-                }
+//                if(f==null){
+//                    f = new File(imagePath);
+//                }
 
                 Intent intent = new Intent();
                 intent.putExtra("title", stitle);
-                intent.putExtra("date", sdate.getText().toString());
+                intent.putExtra("date", date_set);
                 intent.putExtra("time", sTime);
-                intent.putExtra("content",details);
-                intent.putExtra("uri",Uri.fromFile(f).toString());
+                intent.putExtra("content", details);
+//                intent.putExtra("uri",Uri.fromFile(f).toString());
 
                 setResult(3, intent);
 
@@ -267,7 +267,7 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
         Map<String, Object> scheduleValues = null;
         if (add) {
             Schedule schedule =
-                    new Schedule(id, stitle, date_set, sTime, details, Uri.fromFile(f).toString());
+                    new Schedule(id, stitle, date_set, sTime, details);
             scheduleValues = schedule.toMap();
         }
         childUpdates.put(stitle, scheduleValues);

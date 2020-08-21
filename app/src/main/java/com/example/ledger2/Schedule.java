@@ -19,20 +19,20 @@ public class Schedule {
 //    public String location;
     public String time;
     public String detail;
-    public String imgUri;
+//    public String imgUri;
 //    public Bitmap imgUri;
 
     Schedule() {
 //
     }
 
-    Schedule(String id, String title, String dates, String time, String detail, String imgUri) {
+    Schedule(String id, String title, String dates, String time, String detail) {
         this.id = id;
         this.title = title;
         this.date = dates;
         this.time = time;
         this.detail = detail;
-        this.imgUri = imgUri;
+//        this.imgUri = imgUri;
     }
 
     public String getId() {
@@ -71,13 +71,13 @@ public class Schedule {
         return detail;
     }
 
-    public String getImgUri() {
-        return imgUri;
-    }
+//    public String getImgUri() {
+//        return imgUri;
+//    }
 
-    public void setImgUri(String imgUri) {
-        this.imgUri = imgUri;
-    }
+//    public void setImgUri(String imgUri) {
+//        this.imgUri = imgUri;
+//    }
 
     //    void setPmAm(String pmam) {
 //        this.pmam = pmam;
@@ -99,7 +99,7 @@ public class Schedule {
         result.put("date", date);
         result.put("time", time);
         result.put("detail", detail);
-        result.put("imgUri", imgUri);
+//        result.put("imgUri", imgUri);
         return result;
     }
 }

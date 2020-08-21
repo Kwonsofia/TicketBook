@@ -68,8 +68,8 @@ public class Calendar extends AppCompatActivity {
 //                Intent intent = new Intent(getBaseContext(), AddList.class);
 //                startActivity(intent);
 //                finish();
-                Intent imageView_wishlist_add = new Intent(getBaseContext(), AddList.class);
-                startActivityForResult(imageView_wishlist_add, 3);
+                Intent schedule_add = new Intent(getBaseContext(), AddList.class);
+                startActivityForResult(schedule_add, 3);
             }
         });
 
@@ -156,13 +156,13 @@ public class Calendar extends AppCompatActivity {
             String date = data.getStringExtra("date");
             String time = data.getStringExtra("time");
             String content = data.getStringExtra("content");
-            String url = data.getStringExtra("uri");
+//            String url = data.getStringExtra("uri");
 
             //Image poster = data.
 
             String key = date;//
 
-            Schedule works = new Schedule(key, title, date, time, content, url);
+            Schedule works = new Schedule(key, title, date, time, content);
 
             database.getReference(mFirebaseUser.getUid() + "/Calendar/" + key).setValue(works);
 

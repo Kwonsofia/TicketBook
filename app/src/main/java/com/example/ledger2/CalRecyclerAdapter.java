@@ -70,9 +70,9 @@ public class CalRecyclerAdapter extends RecyclerView.Adapter<CalRecyclerAdapter.
         holder.time01.setText(time);
         holder.content01.setText((CharSequence) content);
         holder.key01.setText(key);
-        Glide.with(holder.itemView)
-                .load(arrayList.get(position).getImgUri())
-                .into(holder.imageView01);
+//        Glide.with(holder.itemView)
+//                .load(arrayList.get(position).getImgUri())
+//                .into(holder.imageView01);
 
     }
 
