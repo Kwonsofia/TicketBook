@@ -202,7 +202,7 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
 
 //                Intent intent2 = new Intent(getBaseContext(), MyPage_WishList.class);
 //                startActivity(intent2);
-                finish();
+                //finish();
             }
         });
     }
