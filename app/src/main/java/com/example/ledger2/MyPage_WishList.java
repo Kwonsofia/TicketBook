@@ -126,7 +126,7 @@ public class MyPage_WishList extends AppCompatActivity {
             String image = data.getStringExtra("poster");
             //Image poster = data.
 
-            String key = workname;
+            String key = workname;//
 
             MyPage_WishList_User2 works = new MyPage_WishList_User2(workname, memo, key,image);
 
