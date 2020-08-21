@@ -12,9 +12,7 @@ import java.util.Map;
 public class Schedule {
     public String id;  //사용자 아이디
     public String title;
-    public String year;  //년도
-    public String month;  //월
-    public String date;  //일
+    public String date;  //년, 월, 일
     //    public int expense; //지출
 //    public String userid;
 //    public String userName;
@@ -25,24 +23,13 @@ public class Schedule {
 //    public Bitmap imgUri;
 
     Schedule() {
-//        String id;
-        String title;
-        String year;
-        String month;
-        String date;
-        int hour;
-        int min;
-        String pmam;
-        String detail;
-        Bitmap imgUri;
+//
     }
 
-    Schedule(String title, String year, String month, String date, int hour, int min, String detail) {
+    Schedule(String title, String dates, int hour, int min, String detail) {
 //        this.id = id;
         this.title = title;
-        this.year = year;
-        this.month = month;
-        this.date = date;
+        this.date=dates;
         this.hour = hour;
         this.min = min;
         this.detail = detail;
@@ -54,14 +41,6 @@ public class Schedule {
 
     String getTitle() {
         return title;
-    }
-
-    String getYear() {
-        return year;
-    }
-
-    String getMonth() {
-        return month;
     }
 
     String getDate() {
@@ -90,14 +69,6 @@ public class Schedule {
 
     void setTitle(String title) {
         this.title = title;
-    }
-
-    void setYear(String year) {
-        this.year = year;
-    }
-
-    void setMonth(String month) {
-        this.month = month;
     }
 
     void setDate(String date) {
@@ -129,8 +100,6 @@ public class Schedule {
         HashMap<String, Object> result = new HashMap<>();
 //        result.put("id", id);
         result.put("title", title);
-        result.put("year", year);
-        result.put("month", month);
         result.put("date", date);
         result.put("hour", hour);
         result.put("min", min);

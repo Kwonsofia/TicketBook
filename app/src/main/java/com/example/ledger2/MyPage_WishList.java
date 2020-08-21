@@ -123,11 +123,12 @@ public class MyPage_WishList extends AppCompatActivity {
         if (resultCode == 1) {
             String workname = data.getStringExtra("title");
             String memo = data.getStringExtra("memo");
+            String image = data.getStringExtra("poster");
             //Image poster = data.
 
             String key = workname;
 
-            MyPage_WishList_User2 works = new MyPage_WishList_User2(workname, memo, key);
+            MyPage_WishList_User2 works = new MyPage_WishList_User2(workname, memo, key,image);
 
             database_mypage.getReference(mFirebaseUser.getUid()+"/MyPage/"+key).setValue(works);
 

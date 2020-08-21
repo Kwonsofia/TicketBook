@@ -44,7 +44,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AddList extends AppCompatActivity implements TimePicker.OnTimeChangedListener {
-    private DatabaseReference mPostReference;
+    private DatabaseReference scheduleReference;
     private static final int PICK_FROM_CAMERA = 0;
     private static final int PICK_FROM_ALBUM = 1;
     private static final int CROP_FROM_IMAGE = 2;
@@ -55,18 +55,19 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
 
     //    String id;  //사용자 아이디
     String stitle;
-    String years;  //년도
-    String month;  //월
-    String date;  //일
+    int years;  //년도
+    int month;  //월
+    int date;  //일
     int hour;  //시간
     int min;  //분
-    String pmam;  //오전오후
+    String date_set;
     String details;  //상세내용
     Bitmap imgUri;  //이미지
 
     String sort="id";
 
     EditText title;
+    EditText sdate;
     EditText detail;
 
     ArrayAdapter<String> arrayAdapter;
@@ -81,11 +82,16 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_list);
 
+        java.util.Calendar c = java.util.Calendar.getInstance();
+        years = c.get(java.util.Calendar.YEAR);
+        month = c.get(java.util.Calendar.MONTH);
+        date = c.get(java.util.Calendar.DAY_OF_MONTH);
+
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
         title = (EditText) findViewById(R.id.title);
-        final DatePicker datePicker = (DatePicker) findViewById(R.id.datePicker);
+        sdate=(EditText)findViewById(R.id.datePicker);
         final TimePicker timePicker = (TimePicker) findViewById(R.id.timePicker);
         detail = (EditText) findViewById(R.id.detail);
 
@@ -149,6 +155,14 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
             }
         });
 
+        //달력 버튼
+        findViewById(R.id.date_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dateCalendar();
+            }
+        });
+
 
         //저장하기(제목, 날짜, 시간, 상세내용)
         Button saveButton = (Button) findViewById(R.id.save);
@@ -161,36 +175,20 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
                 //제목
                 stitle = title.getText().toString();
                 //날짜 데이터
-                datePicker.init(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth(),
-                        new DatePicker.OnDateChangedListener() {
-                            @Override
-                            public void onDateChanged(DatePicker view, String year, String monthOfYear, String dayOfMonth) {
-                                years = year;
-                                month = monthOfYear;
-                                date = dayOfMonth;
-                            }
-                        });
+
+                sdate = findViewById(R.id.datePicker);
+
+                date_set = String.format("%04d-%02d-%02d", years, month+1, date);
+                sdate.setText(date_set);
+
                 //시간
                 onTimeChanged(timePicker, hour, min);
 
                 //상세내용
                 details = detail.getText().toString();
 
-//                AdapterView.OnItemClickListener onClickListener=new AdapterView.OnItemClickListener() {
-////                    @Override
-////                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-////                        Log.e("On Click", "position="+position);
-////                        Log.e("On Click", "Data: "+arrayData.get(position));
-////                        String[] tempData=arrayData.get(position).split("\\s+");
-////                        Log.e("On Click", "Split Result= "+tempData);
-////                        title.setText(tempData[0].trim());
-////                        years.
-////                    }
-////                }
-
-                postFirebaseDatabase(true);
+                scheduleFirebaseDatabase(true);
                 getFirebaseDatabase();
-                setInsertMode();
 
                 title.requestFocus();
                 title.setCursorVisible(true);
@@ -200,10 +198,6 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
                 finish();
             }
         });
-    }
-
-    public void setInsertMode() {
-        title.setText("");
     }
 
     public void doTakeAlbumAction() { //카메라 촬영 후 이미지 가져오기
@@ -285,17 +279,17 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
 //    }
 
 
-    public void postFirebaseDatabase(boolean add) {
-        mPostReference = FirebaseDatabase.getInstance().getReference(mFirebaseUser.getUid()+"/Calendar");
+    public void scheduleFirebaseDatabase(boolean add) {
+        scheduleReference = FirebaseDatabase.getInstance().getReference(mFirebaseUser.getUid()+"/Calendar");
         Map<String, Object> childUpdates = new HashMap<>();
         Map<String, Object> scheduleValues = null;
         if (add) {
             Schedule schedule =
-                    new Schedule(stitle, years, month, date, hour, min, details);
+                    new Schedule(stitle, date_set, hour, min, details);
             scheduleValues = schedule.toMap();
         }
         childUpdates.put(stitle, scheduleValues);
-        mPostReference.updateChildren(childUpdates);
+        scheduleReference.updateChildren(childUpdates);
     }
 
     public void getFirebaseDatabase() {
@@ -308,14 +302,13 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     String key = postSnapshot.getKey();
                     Schedule get = postSnapshot.getValue(Schedule.class);
-                    String[] info = {get.title, String.valueOf(get.year), String.valueOf(get.month),
-                            String.valueOf(get.date), String.valueOf(get.hour), String.valueOf(get.min), get.detail};
+                    String[] info = {get.title, get.date, String.valueOf(get.hour), String.valueOf(get.min), get.detail};
                     String Result = setTextLength(info[0], 10) + setTextLength(info[1], 10) + setTextLength(info[2], 10) +
-                            setTextLength(info[3], 10) + setTextLength(info[4], 10) + setTextLength(info[5], 10) + setTextLength(info[6], 10);
+                            setTextLength(info[3], 10) + setTextLength(info[4], 10);
                     arraySchedule.add(Result);
                     arrayIndex.add(key);
                     Log.d("getFirebaseDatabase", "key: "+key);
-                    Log.d("getFirebaseDatabase", "info: "+info[0]+ info[1]+info[2]+info[3]+info[4]+info[5]+info[6]);
+                    Log.d("getFirebaseDatabase", "info: "+info[0]+ info[1]+info[2]+info[3]+info[4]);
                 }
                 arrayAdapter.clear();
                 arrayAdapter.addAll(arraySchedule);
@@ -341,14 +334,14 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
         return text;
     }
 
-    void showDate(){
+    public void dateCalendar(){
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int mYear, int month, int dayOfMonth) {
-                inputDate = String.format("%04d-%02d-%02d",mYear,month+1,dayOfMonth);
-                eDate.setText(inputDate);
+                date_set = String.format("%04d-%02d-%02d",mYear,month+1,dayOfMonth);
+                sdate.setText(date_set);
             }
-        }, year, month, day);
+        }, years, month, date);
         datePickerDialog.show();
     }
 
@@ -357,6 +350,8 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
         this.hour = hourOfDay;
         this.min = minute;
     }
+
+
 
 }
 
