@@ -69,6 +69,7 @@ public class MyPage_TabTwo_Play extends Fragment {
 
                     if(comp.equals("Play")){
                         //Toast.makeText(getContext()," "+comp,Toast.LENGTH_LONG).show();
+                        //
                         arrayList.add(item);
                     }
                     adapter.notifyDataSetChanged();
