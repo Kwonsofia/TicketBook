@@ -53,7 +53,7 @@ public class Calendar extends AppCompatActivity {
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
         database = FirebaseDatabase.getInstance();
-        arrayLists = new ArrayList<>();
+        arrayLists = new ArrayList<Schedule>();
 
         scheduleList = findViewById(R.id.schedule_list);
         scheduleList.setHasFixedSize(true);
@@ -72,38 +72,10 @@ public class Calendar extends AppCompatActivity {
 
         CalendarView calendar=(CalendarView)findViewById(R.id.calendar);
         scheduleReference = database.getReference(mFirebaseUser.getUid()+"/Calendar"); // DB 테이블 연결
-        scheduleReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                // firebase database의 data를 받아오는 곳
-                arrayLists.clear();
-
-
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) { // 반복문으로 List 추출
-                    Schedule list=snapshot.getValue(Schedule.class);
-                    String date = list.getDate();
-                    arrayLists.add(list);
-//                    if(cDate.equals(date)){
-//                        arrayLists.add(list);
-//                    }else{
-//                        arrayLists.clear();
-//                    }
-                }
-                scheduleAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // DB를 가져오던 중 error 발생 시
-                Log.d("LedgerActivity", String.valueOf(databaseError.toException()));
-            }
-        });
-
-
-
-
 
         CalendarView myCalendar=(CalendarView)findViewById(R.id.calendar);
+
+
         myCalendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int dayOfMonth) {
@@ -155,7 +127,6 @@ public class Calendar extends AppCompatActivity {
                 arrayLists.clear();
 
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    String key = postSnapshot.getKey();
                     Schedule get = postSnapshot.getValue(Schedule.class);
                     arrayLists.add(get);
                 }
@@ -170,14 +141,4 @@ public class Calendar extends AppCompatActivity {
         };
 
     }
-
-//    private String setTextLength(String s, int i) {
-//        if (text.length() < length) {
-//            int gap = length - text.length();
-//            for (int i = 0; i < gap; i++) {
-//                text = text + " ";
-//            }
-//        }
-//        return text;
-//    }
 }
