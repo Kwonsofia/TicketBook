@@ -209,9 +209,9 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
 
                 setResult(3, intent);
 
-//                Intent intent2 = new Intent(getBaseContext(), MyPage_WishList.class);
-//                startActivity(intent2);
-                //finish();
+                Intent intent2 = new Intent(getBaseContext(), Calendar.class);
+                startActivity(intent2);
+                finish();
             }
         });
     }
@@ -267,7 +267,7 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
         Map<String, Object> scheduleValues = null;
         if (add) {
             Schedule schedule =
-                    new Schedule(id, stitle, date_set, "상", details, Uri.fromFile(f).toString());
+                    new Schedule(id, stitle, date_set, sTime, details, Uri.fromFile(f).toString());
             scheduleValues = schedule.toMap();
         }
         childUpdates.put(stitle, scheduleValues);

@@ -147,30 +147,6 @@ public class Calendar extends AppCompatActivity {
         });
     }
 
-    public void getFirebaseDatabase() {
-        ValueEventListener postListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Log.e("getFirebaseDatabase", "key: " + dataSnapshot.getChildrenCount());
-                arrayLists.clear();
-
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    String key = postSnapshot.getKey();
-                    Schedule get = postSnapshot.getValue(Schedule.class);
-                    arrayLists.add(get);
-                }
-
-                scheduleAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.w("getFirebaseDatabase", "loadPost:onCancelled", databaseError.toException());
-            }
-        };
-
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -192,14 +168,4 @@ public class Calendar extends AppCompatActivity {
 
         }
     }
-
-//    private String setTextLength(String s, int i) {
-//        if (text.length() < length) {
-//            int gap = length - text.length();
-//            for (int i = 0; i < gap; i++) {
-//                text = text + " ";
-//            }
-//        }
-//        return text;
-//    }
 }
