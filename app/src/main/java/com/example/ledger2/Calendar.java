@@ -43,7 +43,6 @@ public class Calendar extends AppCompatActivity {
     private DatabaseReference databaseReference;
 
     String cDate;
-    int year, month, day;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,10 +54,10 @@ public class Calendar extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
 
-        scheduleList = findViewById(R.id.recyclerView);
-        scheduleList.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
-        scheduleList.setLayoutManager(layoutManager);
+//        scheduleList = findViewById(R.id.recyclerView);
+//        scheduleList.setHasFixedSize(true);
+//        layoutManager = new LinearLayoutManager(this);
+//        scheduleList.setLayoutManager(layoutManager);
 
         //추가 버튼
         ImageButton addButton=(ImageButton)findViewById(R.id.add);
@@ -81,7 +80,7 @@ public class Calendar extends AppCompatActivity {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) { // 반복문으로 List 추출
                     Schedule list=snapshot.getValue(Schedule.class);
                     String date = list.getDate();
-                    if(cDate==date){
+                    if(cDate.equals(date)){
                         arrayLists.add(list);
                     }else{
                         arrayLists.clear();
@@ -98,18 +97,18 @@ public class Calendar extends AppCompatActivity {
             }
         });
 
-        CalendarView myCalendar=(CalendarView)findViewById(R.id.calendar);
-        myCalendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            @Override
-            public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int dayOfMonth) {
-                cDate=year+"-"+(month+1)+"-"+dayOfMonth;
-                Log.d("C_DATE", cDate);
-            }
-        });
+//        CalendarView myCalendar=(CalendarView)findViewById(R.id.calendar);
+//        myCalendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+//            @Override
+//            public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int dayOfMonth) {
+//                cDate=year+"-"+(month+1)+"-"+dayOfMonth;
+//                Log.d("C_DATE", cDate);
+//            }
+//        });
 
 
-        scheduleAdapter = new CalRecyclerAdapter(arrayLists, this,database);
-        scheduleList.setAdapter(scheduleAdapter);
+//        scheduleAdapter = new CalRecyclerAdapter(arrayLists);
+//        scheduleList.setAdapter(scheduleAdapter);
 
 
         ImageView calendar_page=(ImageView)findViewById(R.id.calendar_page);

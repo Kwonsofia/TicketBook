@@ -22,6 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 
+import java.text.BreakIterator;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -38,7 +39,7 @@ public class CalRecyclerAdapter extends RecyclerView.Adapter<CalRecyclerAdapter.
 //    private FirebaseDatabase database;
 //    String selectedKey;
 
-    public CalRecyclerAdapter(ArrayList<Schedule> arrayList, Context context, FirebaseDatabase database) {
+    public CalRecyclerAdapter(ArrayList<Schedule> arrayList) {
         this.arrayList = arrayList;
 //        this.context = context;
 //        this.database = database;
@@ -54,17 +55,13 @@ public class CalRecyclerAdapter extends RecyclerView.Adapter<CalRecyclerAdapter.
         return holder;
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(@NonNull CalRecyclerAdapter.RecyclerViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
         String title = arrayList.get(position).getTitle();
         String date = arrayList.get(position).getDate();
 
-
-
-        holder.title.setText(title);
+        holder.titles.setText(title);
         holder.date.setText((CharSequence) date);
-
     }
 
     @Override
@@ -75,7 +72,7 @@ public class CalRecyclerAdapter extends RecyclerView.Adapter<CalRecyclerAdapter.
 
     class RecyclerViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
-        TextView title;
+        TextView titles;
         TextView date;
         //Image poster;
 //        FirebaseAuth mFirebaseAuth;
@@ -84,7 +81,7 @@ public class CalRecyclerAdapter extends RecyclerView.Adapter<CalRecyclerAdapter.
         public RecyclerViewHolder(@NonNull final View itemView) {
             super(itemView);
 
-            this.title = itemView.findViewById(R.id.schedule_title);
+            this.titles = itemView.findViewById(R.id.schedule_title);
             this.date = itemView.findViewById(R.id.schedule_date);
 
 
