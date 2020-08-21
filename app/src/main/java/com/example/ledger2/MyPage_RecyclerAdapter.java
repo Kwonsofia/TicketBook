@@ -23,6 +23,7 @@ public class MyPage_RecyclerAdapter extends RecyclerView.Adapter<MyPage_Recycler
 //    private FirebaseDatabase database;
     //String selectedKey;
 
+
     public MyPage_RecyclerAdapter(ArrayList<MyPage_WishList_User2> arrayList) {
         this.arrayList = arrayList;
         //this.context = context;

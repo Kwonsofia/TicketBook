@@ -17,8 +17,7 @@ public class Schedule {
 //    public String userid;
 //    public String userName;
 //    public String location;
-    public int hour;
-    public int min;
+    public String time;
     public String detail;
     public String imgUri;
 //    public Bitmap imgUri;
@@ -27,62 +26,49 @@ public class Schedule {
 //
     }
 
-    Schedule(String id, String title, String dates, int hour, int min, String detail, String imgUri) {
+    Schedule(String id, String title, String dates, String time, String detail, String imgUri) {
         this.id = id;
         this.title = title;
         this.date=dates;
-        this.hour = hour;
-        this.min = min;
+        this.time = time;
         this.detail = detail;
         this.imgUri=imgUri;
     }
 
-    String getId() {
+    public String getId() {
         return id;
     }
 
-    String getTitle() {
-        return title;
-    }
-
-    String getDate() {
-        return date;
-    }
-
-    int getHour() {
-        return hour;
-    }
-
-    int getMin() {
-        return min;
-    }
-
-    String getDetail() {
-        return detail;
-    }
-
-//    Bitmap getImgUri() {
-//        return imgUri;
-//    }
-
-    void setId(String id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    void setTitle(String title) {
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
         this.title = title;
     }
 
-    void setDate(String date) {
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
         this.date = date;
     }
 
-    void setHour(int hour) {
-        this.hour = hour;
+    public String getTime() {
+        return time;
     }
 
-    void setMin(int min) {
-        this.min = min;
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getDetail() {
+        return detail;
     }
 
     public String getImgUri() {
@@ -111,8 +97,7 @@ public class Schedule {
 //        result.put("id", id);
         result.put("title", title);
         result.put("date", date);
-        result.put("hour", hour);
-        result.put("min", min);
+        result.put("time", time);
         result.put("detail", detail);
         result.put("imgUri", imgUri);
         return result;

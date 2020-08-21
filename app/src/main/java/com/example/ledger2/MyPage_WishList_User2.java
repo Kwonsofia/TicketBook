@@ -57,7 +57,7 @@ public class MyPage_WishList_User2 implements Comparable<MyPage_WishList_User2> 
     }
 
     @Override
-        public int compareTo(com.example.ledger2.MyPage_WishList_User2 myPage_wishList_user2) {
+        public int compareTo(MyPage_WishList_User2 myPage_wishList_user2) {
             return 0;
         }
 
