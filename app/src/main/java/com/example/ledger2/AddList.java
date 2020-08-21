@@ -187,20 +187,6 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
                 //상세내용
                 details = detail.getText().toString();
 
-
-
-//                AdapterView.OnItemClickListener onClickListener=new AdapterView.OnItemClickListener() {
-////                    @Override
-////                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-////                        Log.e("On Click", "position="+position);
-////                        Log.e("On Click", "Data: "+arrayData.get(position));
-////                        String[] tempData=arrayData.get(position).split("\\s+");
-////                        Log.e("On Click", "Split Result= "+tempData);
-////                        title.setText(tempData[0].trim());
-////                        years.
-////                    }
-////                }
-
                 scheduleFirebaseDatabase(true);
                 getFirebaseDatabase();
 
@@ -316,13 +302,13 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     String key = postSnapshot.getKey();
                     Schedule get = postSnapshot.getValue(Schedule.class);
-                    String[] info = {get.title, String.valueOf(get.date), String.valueOf(get.hour), String.valueOf(get.min), get.detail};
+                    String[] info = {get.title, get.date, String.valueOf(get.hour), String.valueOf(get.min), get.detail};
                     String Result = setTextLength(info[0], 10) + setTextLength(info[1], 10) + setTextLength(info[2], 10) +
                             setTextLength(info[3], 10) + setTextLength(info[4], 10);
                     arraySchedule.add(Result);
                     arrayIndex.add(key);
                     Log.d("getFirebaseDatabase", "key: "+key);
-                    Log.d("getFirebaseDatabase", "info: "+info[0]+ info[1]+info[2]+info[3]+info[4]+info[5]+info[6]);
+                    Log.d("getFirebaseDatabase", "info: "+info[0]+ info[1]+info[2]+info[3]+info[4]);
                 }
                 arrayAdapter.clear();
                 arrayAdapter.addAll(arraySchedule);

@@ -40,7 +40,7 @@ public class Calendar extends AppCompatActivity {
     private ArrayList<Schedule> arrayLists;
 
     private FirebaseDatabase database;
-    private DatabaseReference databaseReference;
+    private DatabaseReference databaseReference_calendar;
 
     String cDate;
 
@@ -70,8 +70,8 @@ public class Calendar extends AppCompatActivity {
         });
 
         CalendarView calendar=(CalendarView)findViewById(R.id.calendar);
-        databaseReference = database.getReference(mFirebaseUser.getUid()+"/Calendar"); // DB 테이블 연결
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        databaseReference_calendar = database.getReference(mFirebaseUser.getUid()+"/Calendar"); // DB 테이블 연결
+        databaseReference_calendar.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // firebase database의 data를 받아오는 곳
@@ -97,14 +97,14 @@ public class Calendar extends AppCompatActivity {
             }
         });
 
-//        CalendarView myCalendar=(CalendarView)findViewById(R.id.calendar);
-//        myCalendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-//            @Override
-//            public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int dayOfMonth) {
-//                cDate=year+"-"+(month+1)+"-"+dayOfMonth;
-//                Log.d("C_DATE", cDate);
-//            }
-//        });
+        CalendarView myCalendar=(CalendarView)findViewById(R.id.calendar);
+        myCalendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int dayOfMonth) {
+                cDate=year+"-"+(month+1)+"-"+dayOfMonth;
+                Log.d("C_DATE", cDate);
+            }
+        });
 
 
 //        scheduleAdapter = new CalRecyclerAdapter(arrayLists);

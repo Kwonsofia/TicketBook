@@ -21,14 +21,15 @@
         <activity android:name=".AddList"></activity>
         <activity android:name=".LedgerListActivity" />
         <activity android:name=".AddActivity" />
-        <activity android:name=".LedgerActivity" />
-        <activity android:name=".MyPage"></activity>
-        <activity android:name=".MyPage_WishList">
+        <activity android:name=".LedgerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".MyPage"></activity>
+        <activity android:name=".MyPage_WishList">
         </activity>
         <activity android:name=".MyPage_WishList_Add"></activity>
     </application>
