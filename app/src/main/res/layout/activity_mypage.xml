@@ -42,7 +42,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:title="My TicketBook"
-            app:titleTextColor="#000000"/>
+            app:titleTextColor="#000000" />
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -118,59 +118,49 @@
 
         </com.google.android.material.tabs.TabLayout>
 
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="420dp"
+            android:background="#ffffff" />
+
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="60dp"
+            android:layout_gravity="bottom"
+            android:background="@color/colorMenu"
+            android:orientation="horizontal">
 
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/viewpager"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="16"
-                android:background="#ffffff" />
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="65dp"
+            <ImageView
+                android:id="@+id/calendar_page"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_gravity="bottom"
-                android:background="@color/colorMenu"
-                android:orientation="horizontal">
+                android:gravity="center"
+                android:padding="15dp"
+                android:src="@drawable/ic_date_range_black_24dp"
+                android:textSize="20dp" />
 
-                <ImageView
-                    android:id="@+id/calendar_page"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:padding="15dp"
-                    android:src="@drawable/ic_date_range_black_24dp"
-                    android:textSize="20dp" />
+            <ImageView
+                android:id="@+id/ledger"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="15dp"
+                android:src="@drawable/ic_credit_card_black_24dp"
+                android:textSize="20dp" />
 
-                <ImageView
-                    android:id="@+id/ledger"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:padding="15dp"
-                    android:src="@drawable/ic_credit_card_black_24dp"
-                    android:textSize="20dp" />
-
-                <ImageView
-                    android:id="@+id/my_page"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:padding="15dp"
-                    android:src="@drawable/ic_baseline_view_list_24"
-                    android:textSize="20dp" />
-            </LinearLayout>
-
-
+            <ImageView
+                android:id="@+id/my_page"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="15dp"
+                android:src="@drawable/ic_baseline_view_list_24"
+                android:textSize="20dp" />
         </LinearLayout>
 
     </LinearLayout>

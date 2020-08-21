@@ -36,7 +36,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <LinearLayout
@@ -71,7 +71,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="15dp"
-                        android:text="제목"
+                        android:text="@string/title"
                         android:textColor="#000000"
                         android:textSize="20dp" />
 
@@ -94,7 +94,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="15dp"
-                        android:text="날짜"
+                        android:text="@string/date"
                         android:textColor="#000000"
                         android:textSize="20dp" />
 
@@ -123,7 +123,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="15dp"
-                        android:text="시간"
+                        android:text="@string/time"
                         android:textColor="#000000"
                         android:textSize="20dp" />
 
@@ -144,7 +144,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="15dp"
-                        android:text="내용"
+                        android:text="@string/content"
                         android:textColor="#000000"
                         android:textSize="20dp" />
 
@@ -174,7 +174,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_weight="1"
-                        android:text="취소"
+                        android:text="@string/cancle"
                         android:textSize="18dp"
                         android:theme="@style/ButtonStyle2" />
 
@@ -184,7 +184,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="10dp"
                         android:layout_weight="1"
-                        android:text="완료"
+                        android:text="@string/finish"
                         android:textSize="18dp"
 
                         android:theme="@style/ButtonStyle2" />
