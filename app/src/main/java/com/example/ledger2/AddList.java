@@ -104,17 +104,15 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
             listView.setAdapter(arrayAdapter);
         }
 
-        //뒤로 가기
-        ImageButton backButton = (ImageButton) findViewById(R.id.back);
-        backButton.setOnClickListener(new View.OnClickListener() {
+        //취소버튼
+        findViewById(R.id.cancel_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent1 = new Intent(getBaseContext(), Calendar.class);
-                startActivity(intent1);
-                finish();
+                Intent intent = new Intent(AddList.this, Calendar.class);
+                startActivity(intent);
+
             }
         });
-
 
         //이미지 가져오기
         ImageButton imageAddButton = findViewById(R.id.image_add_sche);
