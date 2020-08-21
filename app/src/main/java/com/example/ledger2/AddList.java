@@ -243,48 +243,6 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
         scheduleReference.updateChildren(childUpdates);
     }
 
-    public void getFirebaseDatabase() {
-        ValueEventListener postListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Log.e("getFirebaseDatabase", "key: " + dataSnapshot.getChildrenCount());
-                arraySchedule.clear();
-                arrayIndex.clear();
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    String key = postSnapshot.getKey();
-                    Schedule get = postSnapshot.getValue(Schedule.class);
-                    String[] info = {get.title, get.date, String.valueOf(get.hour), String.valueOf(get.min), get.detail};
-                    String Result = setTextLength(info[0], 10) + setTextLength(info[1], 10) + setTextLength(info[2], 10) +
-                            setTextLength(info[3], 10) + setTextLength(info[4], 10);
-                    arraySchedule.add(Result);
-                    arrayIndex.add(key);
-                    Log.d("getFirebaseDatabase", "key: " + key);
-                    Log.d("getFirebaseDatabase", "info: " + info[0] + info[1] + info[2] + info[3] + info[4]);
-                }
-                arrayAdapter.clear();
-                arrayAdapter.addAll(arraySchedule);
-                arrayAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.w("getFirebaseDatabase", "loadPost:onCancelled", databaseError.toException());
-            }
-        };
-        Query sortbyAge = FirebaseDatabase.getInstance().getReference().child("id_list").orderByChild(sort);
-        sortbyAge.addListenerForSingleValueEvent(postListener);
-    }
-
-    public String setTextLength(String text, int length) {
-        if (text.length() < length) {
-            int gap = length - text.length();
-            for (int i = 0; i < gap; i++) {
-                text = text + " ";
-            }
-        }
-        return text;
-    }
-
     public void dateCalendar() {
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override

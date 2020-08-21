@@ -24,13 +24,13 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 
 public class Calendar extends AppCompatActivity {
-
     FirebaseAuth mFirebaseAuth;
     FirebaseUser mFirebaseUser;
 
@@ -40,7 +40,7 @@ public class Calendar extends AppCompatActivity {
     private ArrayList<Schedule> arrayLists;
 
     private FirebaseDatabase database;
-    private DatabaseReference databaseReference_calendar;
+    private DatabaseReference scheduleReference;
 
     String cDate;
 
@@ -71,12 +71,13 @@ public class Calendar extends AppCompatActivity {
         });
 
         CalendarView calendar=(CalendarView)findViewById(R.id.calendar);
-        databaseReference_calendar = database.getReference(mFirebaseUser.getUid()+"/Calendar"); // DB 테이블 연결
-        databaseReference_calendar.addValueEventListener(new ValueEventListener() {
+        scheduleReference = database.getReference(mFirebaseUser.getUid()+"/Calendar"); // DB 테이블 연결
+        scheduleReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // firebase database의 data를 받아오는 곳
                 arrayLists.clear();
+
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) { // 반복문으로 List 추출
                     Schedule list=snapshot.getValue(Schedule.class);
@@ -97,6 +98,8 @@ public class Calendar extends AppCompatActivity {
                 Log.d("LedgerActivity", String.valueOf(databaseError.toException()));
             }
         });
+
+
 
 
 
@@ -143,4 +146,38 @@ public class Calendar extends AppCompatActivity {
             }
         });
     }
+
+    public void getFirebaseDatabase() {
+        ValueEventListener postListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.e("getFirebaseDatabase", "key: " + dataSnapshot.getChildrenCount());
+                arrayLists.clear();
+
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    String key = postSnapshot.getKey();
+                    Schedule get = postSnapshot.getValue(Schedule.class);
+                    arrayLists.add(get);
+                }
+
+                scheduleAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w("getFirebaseDatabase", "loadPost:onCancelled", databaseError.toException());
+            }
+        };
+
+    }
+
+//    private String setTextLength(String s, int i) {
+//        if (text.length() < length) {
+//            int gap = length - text.length();
+//            for (int i = 0; i < gap; i++) {
+//                text = text + " ";
+//            }
+//        }
+//        return text;
+//    }
 }
