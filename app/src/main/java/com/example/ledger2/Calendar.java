@@ -98,6 +98,8 @@ public class Calendar extends AppCompatActivity {
             }
         });
 
+
+
         CalendarView myCalendar=(CalendarView)findViewById(R.id.calendar);
         myCalendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override

@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -26,7 +27,11 @@ import android.widget.TimePicker;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.loader.content.CursorLoader;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -35,6 +40,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -53,7 +61,7 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
     private ImageView iv_UserPhoto;
     private String absolutePath;
 
-    //    String id;  //사용자 아이디
+    String id;  //사용자 아이디
     String stitle;
     int years;  //년도
     int month;  //월
@@ -62,17 +70,23 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
     int min;  //분
     String date_set;
     String details;  //상세내용
-    Bitmap imgUri;  //이미지
+    String imagePath;
+    Task<Uri> downloadUri;
+    File f;
+    private static int GALLARY_CODE = 10;
 
-    String sort="id";
+    String sort = "id";
 
     EditText title;
     EditText sdate;
     EditText detail;
 
+    ImageButton image_addButton;
+
     ArrayAdapter<String> arrayAdapter;
     FirebaseAuth mFirebaseAuth;
     FirebaseUser mFirebaseUser;
+    FirebaseStorage storage;
 
     static ArrayList<String> arrayIndex = new ArrayList<String>();
     static ArrayList<String> arraySchedule = new ArrayList<String>();
@@ -91,7 +105,7 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
         title = (EditText) findViewById(R.id.title);
-        sdate=(EditText)findViewById(R.id.datePicker);
+        sdate = (EditText) findViewById(R.id.datePicker);
         final TimePicker timePicker = (TimePicker) findViewById(R.id.timePicker);
         detail = (EditText) findViewById(R.id.detail);
 
@@ -100,7 +114,7 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
 
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
         ListView listView = (ListView) findViewById(R.id.schedule_list);
-        if(listView != null){
+        if (listView != null) {
             listView.setAdapter(arrayAdapter);
         }
 
@@ -115,41 +129,15 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
         });
 
         //이미지 가져오기
-        ImageButton imageAddButton = findViewById(R.id.image_add_sche);
-        imageAddButton.setOnClickListener(new View.OnClickListener() {
+        image_addButton = findViewById(R.id.image_add_sche);
+        image_addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /* Intent intent3 = new Intent(getBaseContext(), AddList.class);
-                startActivity(intent3);
-                finish();*/
+                Intent intent2 = new Intent(Intent.ACTION_PICK);
+                intent2.setType(MediaStore.Images.Media.CONTENT_TYPE);
 
-                DialogInterface.OnClickListener cameraListener = new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        doTakePhotoAction();
-                    }
-                };
+                startActivityForResult(intent2, GALLARY_CODE);
 
-                DialogInterface.OnClickListener albumListener = new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        doTakeAlbumAction();
-                    }
-                };
-
-                DialogInterface.OnClickListener cancelListener = new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                };
-
-                new AlertDialog.Builder(AddList.this)
-                        .setTitle("업로드 할 이미지를 선택하세요")
-                        .setPositiveButton("사진촬영", cameraListener)
-                        .setNeutralButton("앨범선택", albumListener)
-                        .setNegativeButton("취소", cancelListener)
-                        .show();
             }
         });
 
@@ -176,7 +164,7 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
 
                 sdate = findViewById(R.id.datePicker);
 
-                date_set = String.format("%04d-%02d-%02d", years, month+1, date);
+                date_set = String.format("%04d-%02d-%02d", years, month + 1, date);
                 sdate.setText(date_set);
 
                 //시간
@@ -186,7 +174,6 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
                 details = detail.getText().toString();
 
                 scheduleFirebaseDatabase(true);
-                getFirebaseDatabase();
 
                 title.requestFocus();
                 title.setCursorVisible(true);
@@ -198,92 +185,58 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
         });
     }
 
-    public void doTakePhotoAction() { //카메라 촬영 후 이미지 가져오기
-        Intent intent4 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-        String url = "tmp_" + String.valueOf(System.currentTimeMillis()) + ".jpg";
-        mImageCaptureUri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(), url));
-
-        intent4.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, mImageCaptureUri);
-        startActivityForResult(intent4, PICK_FROM_CAMERA);
-    }
-
-    public void doTakeAlbumAction() {  //앨범에서 이미지 가져오기
-        Intent intent5 = new Intent(Intent.ACTION_PICK);
-        intent5.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
-        startActivityForResult(intent5, PICK_FROM_ALBUM);
-    }
-
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == GALLARY_CODE) {
+            imagePath = getPath(data.getData());
 
-        if (resultCode != RESULT_OK)
-            return;
-        switch (requestCode) {
-            case PICK_FROM_ALBUM: {
-                mImageCaptureUri = data.getData();
-                Log.d("SmartWheel", mImageCaptureUri.getPath().toString());
-            }
-            case PICK_FROM_CAMERA: {
-                Intent intent5 = new Intent("com.android.camera.action.CROP");
-                intent5.setDataAndType(mImageCaptureUri, "image/*");
-
-                intent5.putExtra("outputX", 200);
-                intent5.putExtra("outputY", 200);
-                intent5.putExtra("aspectX", 1);
-                intent5.putExtra("aspectY", 1);
-                intent5.putExtra("scale", true);
-                intent5.putExtra("return-data", true);
-                startActivityForResult(intent5, CROP_FROM_IMAGE);
-                break;
-            }
-            case CROP_FROM_IMAGE: {
-                if (resultCode != RESULT_OK) {
-                    return;
-                }
-
-                final Bundle extras = data.getExtras();
-
-                String filePath = Environment.getExternalStorageDirectory().getAbsolutePath() +
-                        "/SmartWheel/" + System.currentTimeMillis() + ".jpg";
-
-                if (extras != null) {
-                    Bitmap photo = extras.getParcelable("data");
-                    iv_UserPhoto.setImageBitmap(photo);
-//                    storeCropImage(photo, filePath);
-                    absolutePath = filePath;
-                    break;
-                }
-            }
+            f = new File(imagePath);
+            image_addButton.setImageURI(Uri.fromFile(f));
         }
     }
 
+    public String getPath(Uri uri) {
+        String[] proj = {MediaStore.Images.Media.DATA};
+        CursorLoader cursorLoader = new CursorLoader(this, uri, proj, null, null, null);
 
-//    private void storeCropImage(Bitmap photo, String filePath) {
-//        String dirPath=Environment.getExternalStorageDirectory().getAbsolutePath()+"/SmartWheel";
-//        File directory_SmartWheel=new File(dirPath);
-//
-//        if(!directory_SmartWheel.exists())
-//            directory_SmartWheel.mkdir();
-//
-//        File copyFile=new File(filePath);
-//        BufferedOutputStream out=null;
-//
-//        try{
-//            copyFile.createNewFile();
-//            out=new BufferedOutputStream(new FileOutputStream(copyFile));
-//            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
-//        }
-//    }
+        Cursor cursor = cursorLoader.loadInBackground();
+        int index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+
+        cursor.moveToFirst();
+
+        return cursor.getString(index);
+    }
+
+    private void upload(String uri) {
+        StorageReference storageRef = storage.getReferenceFromUrl("gs://ledger2-3da43.appspot.com/");
+
+        Uri file = Uri.fromFile(new File(uri));
+        StorageReference riversRef = storageRef.child("images/" + file.getLastPathSegment());
+        UploadTask uploadTask = riversRef.putFile(file);
+
+// Register observers to listen for when the download is done or if it fails
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle unsuccessful uploads
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+                downloadUri = taskSnapshot.getStorage().getDownloadUrl();
+            }
+        });
+    }
 
 
     public void scheduleFirebaseDatabase(boolean add) {
-        scheduleReference = FirebaseDatabase.getInstance().getReference(mFirebaseUser.getUid()+"/Calendar");
+        scheduleReference = FirebaseDatabase.getInstance().getReference(mFirebaseUser.getUid() + "/Calendar");
         Map<String, Object> childUpdates = new HashMap<>();
         Map<String, Object> scheduleValues = null;
         if (add) {
             Schedule schedule =
-                    new Schedule(stitle, date_set, hour, min, details);
+                    new Schedule(id, stitle, date_set, hour, min, details, Uri.fromFile(f).toString());
             scheduleValues = schedule.toMap();
         }
         childUpdates.put(stitle, scheduleValues);
@@ -305,8 +258,8 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
                             setTextLength(info[3], 10) + setTextLength(info[4], 10);
                     arraySchedule.add(Result);
                     arrayIndex.add(key);
-                    Log.d("getFirebaseDatabase", "key: "+key);
-                    Log.d("getFirebaseDatabase", "info: "+info[0]+ info[1]+info[2]+info[3]+info[4]);
+                    Log.d("getFirebaseDatabase", "key: " + key);
+                    Log.d("getFirebaseDatabase", "info: " + info[0] + info[1] + info[2] + info[3] + info[4]);
                 }
                 arrayAdapter.clear();
                 arrayAdapter.addAll(arraySchedule);
@@ -318,7 +271,7 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
                 Log.w("getFirebaseDatabase", "loadPost:onCancelled", databaseError.toException());
             }
         };
-        Query sortbyAge=FirebaseDatabase.getInstance().getReference().child("id_list").orderByChild(sort);
+        Query sortbyAge = FirebaseDatabase.getInstance().getReference().child("id_list").orderByChild(sort);
         sortbyAge.addListenerForSingleValueEvent(postListener);
     }
 
@@ -332,11 +285,11 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
         return text;
     }
 
-    public void dateCalendar(){
+    public void dateCalendar() {
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int mYear, int month, int dayOfMonth) {
-                date_set = String.format("%04d-%02d-%02d",mYear,month+1,dayOfMonth);
+                date_set = String.format("%04d-%02d-%02d", mYear, month + 1, dayOfMonth);
                 sdate.setText(date_set);
             }
         }, years, month, date);
@@ -348,7 +301,6 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
         this.hour = hourOfDay;
         this.min = minute;
     }
-
 
 
 }

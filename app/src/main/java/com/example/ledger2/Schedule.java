@@ -114,6 +114,7 @@ public class Schedule {
         result.put("hour", hour);
         result.put("min", min);
         result.put("detail", detail);
+        result.put("imgUri", imgUri);
         return result;
     }
 }
