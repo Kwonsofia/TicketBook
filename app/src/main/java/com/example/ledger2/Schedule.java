@@ -27,14 +27,14 @@ public class Schedule {
 //
     }
 
-    Schedule(String title, String dates, int hour, int min, String detail) {
-//        this.id = id;
+    Schedule(String id, String title, String dates, int hour, int min, String detail, String imgUri) {
+        this.id = id;
         this.title = title;
         this.date=dates;
         this.hour = hour;
         this.min = min;
         this.detail = detail;
-//        this.imgUri=imgUri;
+        this.imgUri=imgUri;
     }
 
     String getId() {
