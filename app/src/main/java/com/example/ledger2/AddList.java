@@ -107,6 +107,8 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
         month = c.get(java.util.Calendar.MONTH);
         date = c.get(java.util.Calendar.DAY_OF_MONTH);
 
+        date_set = String.format("%04d-%02d-%02d", years, month + 1, date);
+
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
@@ -172,7 +174,7 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
 
                 sdate = findViewById(R.id.datePicker);
 
-                date_set = String.format("%04d-%02d-%02d", years, month + 1, date);
+                //date_set = String.format("%04d-%02d-%02d", years, month + 1, date);
                 sdate.setText(date_set);
 
                 //시간
@@ -181,24 +183,28 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
                 //상세내용
                 details = detail.getText().toString();
 
-                scheduleFirebaseDatabase(true);
+//                scheduleFirebaseDatabase(true);
 
                 title.requestFocus();
                 title.setCursorVisible(true);
 
-                Intent intent2 = new Intent(getBaseContext(), Calendar.class);
-                startActivity(intent2);
+//                Intent intent2 = new Intent(getBaseContext(), Calendar.class);
+//                startActivity(intent2);
 //                finish();
 
 
-//                Intent intent = new Intent();
-//                intent.putExtra("title", stitle);
-//                intent.putExtra("date", sdate.getText().toString());
-//                intent.putExtra("time","모름.");
-//                intent.putExtra("content",details);
-//                intent.putExtra("uri",Uri.fromFile(f));
-//
-//                setResult(3, intent);
+                if(f==null){
+                    f = new File(imagePath);
+                }
+
+                Intent intent = new Intent();
+                intent.putExtra("title", stitle);
+                intent.putExtra("date", sdate.getText().toString());
+                intent.putExtra("time","모름.");
+                intent.putExtra("content",details);
+                intent.putExtra("uri",Uri.fromFile(f).toString());
+
+                setResult(3, intent);
 
 //                Intent intent2 = new Intent(getBaseContext(), MyPage_WishList.class);
 //                startActivity(intent2);
