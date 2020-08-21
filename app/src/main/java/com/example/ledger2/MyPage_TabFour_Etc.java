@@ -70,7 +70,7 @@ public class MyPage_TabFour_Etc extends Fragment {
                     String comp = item.getDetail();
 
                     if(!comp.equals("Musical")&&!comp.equals("Play")&&!comp.equals("Exhibition")){
-                        Toast.makeText(getContext()," "+comp,Toast.LENGTH_LONG).show();
+                       // Toast.makeText(getContext()," "+comp,Toast.LENGTH_LONG).show();
                         arrayList.add(item);
                     }
                     adapter.notifyDataSetChanged();
