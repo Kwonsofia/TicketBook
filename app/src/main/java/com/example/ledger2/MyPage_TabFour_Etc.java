@@ -36,7 +36,7 @@ public class MyPage_TabFour_Etc extends Fragment {
 
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
-
+//
     FirebaseAuth mFirebaseAuth;
     FirebaseUser mFirebaseUser;
 

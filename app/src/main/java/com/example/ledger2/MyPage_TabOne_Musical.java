@@ -75,7 +75,7 @@ public class MyPage_TabOne_Musical extends Fragment {
                     adapter.notifyDataSetChanged();
                 }
             }
-
+//
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 // DB를 가져오던 중 error 발생 시

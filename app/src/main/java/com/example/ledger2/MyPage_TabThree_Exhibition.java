@@ -36,7 +36,7 @@ public class MyPage_TabThree_Exhibition extends Fragment {
 
     FirebaseAuth mFirebaseAuth;
     FirebaseUser mFirebaseUser;
-
+//
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

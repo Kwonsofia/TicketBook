@@ -37,7 +37,7 @@ public class MyPage_TabTwo_Play extends Fragment {
 
     FirebaseAuth mFirebaseAuth;
     FirebaseUser mFirebaseUser;
-
+//
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

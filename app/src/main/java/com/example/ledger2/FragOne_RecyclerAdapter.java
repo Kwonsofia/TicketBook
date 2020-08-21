@@ -29,7 +29,7 @@ public class FragOne_RecyclerAdapter extends RecyclerView.Adapter<FragOne_Recycl
         return holder;
     }
 
-
+ //
     @Override
     public void onBindViewHolder(Holder holder, int position) {
         // 각 위치에 문자열 세팅
