@@ -156,6 +156,8 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
             @Override
             public void onClick(View v) {
 
+//                upload(imagePath);
+
                 //아이디
 
                 //제목
@@ -178,18 +180,19 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
                 title.requestFocus();
                 title.setCursorVisible(true);
 
-//                Intent intent2 = new Intent(getBaseContext(), Calendar.class);
-//                startActivity(intent2);
+                Intent intent2 = new Intent(getBaseContext(), Calendar.class);
+                startActivity(intent2);
 //                finish();
 
-                Intent intent = new Intent();
-                intent.putExtra("title", stitle);
-                intent.putExtra("date", sdate.getText().toString());
-                intent.putExtra("time","모름.");
-                intent.putExtra("content",details);
-                intent.putExtra("uri","몰라이");
 
-                setResult(3, intent);
+//                Intent intent = new Intent();
+//                intent.putExtra("title", stitle);
+//                intent.putExtra("date", sdate.getText().toString());
+//                intent.putExtra("time","모름.");
+//                intent.putExtra("content",details);
+//                intent.putExtra("uri",Uri.fromFile(f));
+//
+//                setResult(3, intent);
 
 //                Intent intent2 = new Intent(getBaseContext(), MyPage_WishList.class);
 //                startActivity(intent2);

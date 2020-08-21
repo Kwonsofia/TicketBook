@@ -1,6 +1,7 @@
 package com.example.ledger2;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -64,9 +65,11 @@ public class Calendar extends AppCompatActivity {
         ImageButton addButton=(ImageButton)findViewById(R.id.add);
         addButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {  //추가
-                Intent intent = new Intent(getBaseContext(), AddList.class);
-                startActivity(intent);
-                finish();
+//                Intent intent = new Intent(getBaseContext(), AddList.class);
+//                startActivity(intent);
+//                finish();
+                Intent imageView_wishlist_add = new Intent(getBaseContext(), AddList.class);
+                startActivityForResult(imageView_wishlist_add, 3);
             }
         });
 
@@ -169,6 +172,27 @@ public class Calendar extends AppCompatActivity {
             }
         };
 
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == 3) {
+            String title = data.getStringExtra("title");
+            String date = data.getStringExtra("date");
+            String time = data.getStringExtra("time");
+            String content = data.getStringExtra("content");
+            String url = data.getStringExtra("url");
+
+            //Image poster = data.
+
+            String key = url;//
+
+            Schedule works = new Schedule(key,title,date,time,content,url);
+
+            database.getReference(mFirebaseUser.getUid()+"/Calendar/"+key).setValue(works);
+
+        }
     }
 
 //    private String setTextLength(String s, int i) {

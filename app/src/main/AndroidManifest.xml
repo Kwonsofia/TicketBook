@@ -35,6 +35,7 @@
         <activity android:name=".MyPage_WishList">
         </activity>
         <activity android:name=".MyPage_WishList_Add"></activity>
+
     </application>
 
 </manifest>
