@@ -71,16 +71,37 @@ public class Calendar extends AppCompatActivity {
         });
 
         CalendarView calendar=(CalendarView)findViewById(R.id.calendar);
-        scheduleReference = database.getReference(mFirebaseUser.getUid()+"/Calendar"); // DB 테이블 연결
-
         CalendarView myCalendar=(CalendarView)findViewById(R.id.calendar);
-
 
         myCalendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int dayOfMonth) {
                 cDate=year+"-"+(month+1)+"-"+dayOfMonth;
                 Log.d("C_DATE", cDate);
+            }
+        });
+
+        scheduleReference = database.getReference(mFirebaseUser.getUid()+"/Calendar"); // DB 테이블 연결
+        scheduleReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.e("getFirebaseDatabase", "key: " + dataSnapshot.getChildrenCount());
+                arrayLists.clear();
+
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    Schedule get = postSnapshot.getValue(Schedule.class);
+                    String date=get.getDate();
+                    if(date.equals(cDate)){
+                        arrayLists.add(get);
+                    }
+                }
+
+                scheduleAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w("getFirebaseDatabase", "loadPost:onCancelled", databaseError.toException());
             }
         });
 
