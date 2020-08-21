@@ -53,11 +53,12 @@ public class Calendar extends AppCompatActivity {
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
         database = FirebaseDatabase.getInstance();
+        arrayLists = new ArrayList<>();
 
-//        scheduleList = findViewById(R.id.recyclerView);
-//        scheduleList.setHasFixedSize(true);
-//        layoutManager = new LinearLayoutManager(this);
-//        scheduleList.setLayoutManager(layoutManager);
+        scheduleList = findViewById(R.id.schedule_list);
+        scheduleList.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this);
+        scheduleList.setLayoutManager(layoutManager);
 
         //추가 버튼
         ImageButton addButton=(ImageButton)findViewById(R.id.add);
@@ -80,13 +81,13 @@ public class Calendar extends AppCompatActivity {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) { // 반복문으로 List 추출
                     Schedule list=snapshot.getValue(Schedule.class);
                     String date = list.getDate();
-                    if(cDate.equals(date)){
-                        arrayLists.add(list);
-                    }else{
-                        arrayLists.clear();
-                    }
+                    arrayLists.add(list);
+//                    if(cDate.equals(date)){
+//                        arrayLists.add(list);
+//                    }else{
+//                        arrayLists.clear();
+//                    }
                 }
-
                 scheduleAdapter.notifyDataSetChanged();
             }
 
@@ -107,8 +108,8 @@ public class Calendar extends AppCompatActivity {
         });
 
 
-//        scheduleAdapter = new CalRecyclerAdapter(arrayLists);
-//        scheduleList.setAdapter(scheduleAdapter);
+        scheduleAdapter = new CalRecyclerAdapter(arrayLists);
+        scheduleList.setAdapter(scheduleAdapter);
 
 
         ImageView calendar_page=(ImageView)findViewById(R.id.calendar_page);

@@ -158,7 +158,7 @@ public class MyPage extends AppCompatActivity implements NavigationView.OnNaviga
                 startActivity(intent_logout);
                 break;
         }
-        drawerLayout.closeDrawer(GravityCompat.START);
+        //drawerLayout.closeDrawer(GravityCompat.START);
         //메뉴가 선택되면 행해지기 전에 Drawer가 닫힘.
         return true;
     }
