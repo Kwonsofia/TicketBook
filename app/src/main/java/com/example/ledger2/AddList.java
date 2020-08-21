@@ -70,6 +70,7 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
     int min;  //분
     String date_set;
     String details;  //상세내용
+    String sTime;
     String imagePath;
     Task<Uri> downloadUri;
     File f;
@@ -179,6 +180,7 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
 
                 //시간
                 onTimeChanged(timePicker, hour, min);
+                sTime=getAmPm(hour)+" "+hour+"시 "+min+"분";
 
                 //상세내용
                 details = detail.getText().toString();
@@ -200,7 +202,7 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
                 Intent intent = new Intent();
                 intent.putExtra("title", stitle);
                 intent.putExtra("date", sdate.getText().toString());
-                intent.putExtra("time","모름.");
+                intent.putExtra("time", sTime);
                 intent.putExtra("content",details);
                 intent.putExtra("uri",Uri.fromFile(f).toString());
 
@@ -280,6 +282,13 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
             }
         }, years, month, date);
         datePickerDialog.show();
+    }
+
+    private String getAmPm(int hour){
+        if(hour>=12)
+            return "AM";
+        else
+            return "PM";
     }
 
     @Override
