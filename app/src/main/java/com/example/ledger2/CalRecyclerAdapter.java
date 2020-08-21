@@ -1,6 +1,8 @@
 package com.example.ledger2;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
@@ -37,7 +39,7 @@ import static android.content.ContentValues.TAG;
 public class CalRecyclerAdapter extends RecyclerView.Adapter<CalRecyclerAdapter.RecyclerViewHolder> {
 
     private ArrayList<Schedule> arrayList;
-    private Context context;
+    private Context contexts;
     private FirebaseDatabase database;
     String selectedKey;
 
@@ -74,6 +76,42 @@ public class CalRecyclerAdapter extends RecyclerView.Adapter<CalRecyclerAdapter.
 //                .load(arrayList.get(position).getImgUri())
 //                .into(holder.imageView01);
 
+//        holder.key01.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                final AlertDialog.Builder builder=new AlertDialog.Builder(contexts);
+//                builder.setTitle("삭제");
+//                builder.setMessage("해당 항목을 삭제하시겠습니까?");
+//                builder.setPositiveButton("예",
+//                        new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//                                switch (i.getItemId()) {
+////                                case R.id.delete:
+////                                    database
+////                                            .getReference(mFirebaseUser.getUid() + "/Calendar/" + selectedKey)
+////                                            .removeValue(new DatabaseReference.CompletionListener() {
+////                                                @Override
+////                                                public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+////                                                    Toast.makeText(contexts, "삭제가 완료되었습니다.", Toast.LENGTH_LONG).show();
+////                                                }
+////                                            });
+////
+////                                    break;
+////                            }
+//                            }
+//                        });
+//                builder.setNegativeButton("아니오",
+//                        new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//                                dialogInterface.cancel();
+//                            }
+//                        });
+//                builder.show();
+//            }
+//        });
+
     }
 
     @Override
@@ -104,43 +142,43 @@ public class CalRecyclerAdapter extends RecyclerView.Adapter<CalRecyclerAdapter.
             content01 = itemView.findViewById(R.id.schedule_content);
             key01 = itemView.findViewById(R.id.schedule_key);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(final View v) {
-                    selectedKey = key01.getText().toString();
-
-                    // PopupMenu 객체 생성
-                    PopupMenu popup = new PopupMenu(context, v);
-                    // 설정한 popup XML을 inflate
-                    popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
-
-                    //팝업메뉴 클릭 시 이벤트
-                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                        @Override
-                        public boolean onMenuItemClick(MenuItem item) {
-                            switch (item.getItemId()) {
-                                case R.id.delete:
-                                    database
-                                            .getReference(mFirebaseUser.getUid() + "/Calendar/" + selectedKey)
-                                            .removeValue(new DatabaseReference.CompletionListener() {
-                                                @Override
-                                                public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                                                    Toast.makeText(context, "삭제가 완료되었습니다.", Toast.LENGTH_LONG).show();
-                                                }
-                                            });
-
-                                    break;
-                            }
-                            return false;
-                        }
-                    });
-                    popup.show();
+//            itemView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(final View v) {
+//                    selectedKey = key01.getText().toString();
+//
+//                    // PopupMenu 객체 생성
+//                    PopupMenu popups = new PopupMenu(contexts, v);
+//                    // 설정한 popup XML을 inflate
+//                    popups.getMenuInflater().inflate(R.menu.popup_menu, popups.getMenu());
+//
+//                    //팝업메뉴 클릭 시 이벤트
+//                    popups.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+//                        @Override
+//                        public boolean onMenuItemClick(MenuItem item) {
+//                            switch (item.getItemId()) {
+//                                case R.id.delete:
+//                                    database
+//                                            .getReference(mFirebaseUser.getUid() + "/Calendar/" + selectedKey)
+//                                            .removeValue(new DatabaseReference.CompletionListener() {
+//                                                @Override
+//                                                public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+//                                                    Toast.makeText(contexts, "삭제가 완료되었습니다.", Toast.LENGTH_LONG).show();
+//                                                }
+//                                            });
+//
+//                                    break;
+//                            }
+//                            return false;
+//                        }
+//                    });
+//                    popups.show();
 
                 }
 //            mFirebaseAuth = FirebaseAuth.getInstance();
 //            mFirebaseUser = mFirebaseAuth.getCurrentUser();
-            });
-        }
+//            });
+//        }
     }
 
 

@@ -1,5 +1,6 @@
 package com.example.ledger2;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -76,7 +77,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         itemViewHolder.title.setText(arrayList.get(i).getTitle());
         itemViewHolder.price.setText(arrayList.get(i).getPrice());
         itemViewHolder.key.setText(arrayList.get(i).getKey());
-
 
     }
 

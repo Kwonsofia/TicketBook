@@ -286,7 +286,7 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
     }
 
     private String getAmPm(int hour){
-        if(hour>=12)
+        if(hour<=12)
             return "AM";
         else
             return "PM";

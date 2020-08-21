@@ -29,6 +29,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 
 public class Calendar extends AppCompatActivity {
@@ -39,6 +40,7 @@ public class Calendar extends AppCompatActivity {
     private CalRecyclerAdapter scheduleAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<Schedule> arrayLists;
+    private ArrayList<Schedule> schedule_List;
 
     private FirebaseDatabase database;
     private DatabaseReference scheduleReference;
@@ -73,7 +75,6 @@ public class Calendar extends AppCompatActivity {
             }
         });
 
-        CalendarView calendar = (CalendarView) findViewById(R.id.calendar);
         scheduleReference = database.getReference(mFirebaseUser.getUid() + "/Calendar"); // DB 테이블 연결
         scheduleReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -81,16 +82,11 @@ public class Calendar extends AppCompatActivity {
                 // firebase database의 data를 받아오는 곳
                 arrayLists.clear();
 
-
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) { // 반복문으로 List 추출
                     Schedule list = snapshot.getValue(Schedule.class);
                     String date = list.getDate();
+                    Log.d("Date", date);
                     arrayLists.add(list);
-//                    if(cDate.equals(date)){
-//                        arrayLists.add(list);
-//                    }else{
-//                        arrayLists.clear();
-//                    }
                 }
                 scheduleAdapter.notifyDataSetChanged();
             }
@@ -102,15 +98,43 @@ public class Calendar extends AppCompatActivity {
             }
         });
 
-
+        CalendarView calendar = (CalendarView) findViewById(R.id.calendar);
         CalendarView myCalendar = (CalendarView) findViewById(R.id.calendar);
         myCalendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int dayOfMonth) {
+                arrayLists.clear();
                 cDate = year + "-" + (month + 1) + "-" + dayOfMonth;
                 Log.d("C_DATE", cDate);
+
             }
+
         });
+
+//        scheduleReference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                // firebase database의 data를 받아오는 곳
+//
+//                for (DataSnapshot snapshot : dataSnapshot.getChildren()) { // 반복문으로 List 추출
+//                    Schedule list = snapshot.getValue(Schedule.class);
+//                    String date = list.getDate();
+//                    Log.d("Date", date);
+//                    if(cDate.equals(date)){
+//                        arrayLists.add(list);
+//                    }
+//                }
+//                scheduleAdapter.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//                // DB를 가져오던 중 error 발생 시
+//                Log.d("LedgerActivity", String.valueOf(databaseError.toException()));
+//            }
+//        });
+
+
 
 
         scheduleAdapter = new CalRecyclerAdapter(arrayLists);
