@@ -19,7 +19,7 @@ public class MyPage_PageAdapter extends FragmentStatePagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        switch (position){
+        switch (position) {
             case 0: {
                 MyPage_TabOne_Musical myPageTaboneMusical = new MyPage_TabOne_Musical();
                 return myPageTaboneMusical;
@@ -29,13 +29,13 @@ public class MyPage_PageAdapter extends FragmentStatePagerAdapter {
                 MyPage_TabTwo_Play myPageTabTwoPlay = new MyPage_TabTwo_Play();
                 return myPageTabTwoPlay;
             }
-            case 2:{
+            case 2: {
                 MyPage_TabThree_Exhibition myPageTabThreeExhibition = new MyPage_TabThree_Exhibition();
                 return myPageTabThreeExhibition;
             }
-            case 3:{
+            case 3: {
                 MyPage_TabFour_Etc myPageTabFourEtc = new MyPage_TabFour_Etc();
-                return  myPageTabFourEtc;
+                return myPageTabFourEtc;
             }
             default:
                 return null;

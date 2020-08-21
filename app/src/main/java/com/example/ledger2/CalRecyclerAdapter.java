@@ -59,7 +59,7 @@ public class CalRecyclerAdapter extends RecyclerView.Adapter<CalRecyclerAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
-        String title =arrayList.get(position).getTitle();
+        String title = arrayList.get(position).getTitle();
         String date = arrayList.get(position).getDate();
         String time = arrayList.get(position).getTime();
         String content = arrayList.get(position).getDetail();
@@ -78,7 +78,7 @@ public class CalRecyclerAdapter extends RecyclerView.Adapter<CalRecyclerAdapter.
 
     @Override
     public int getItemCount() {
-        return (arrayList != null ? arrayList.size(): 0);
+        return (arrayList != null ? arrayList.size() : 0);
     }
 
 
@@ -142,7 +142,6 @@ public class CalRecyclerAdapter extends RecyclerView.Adapter<CalRecyclerAdapter.
             });
         }
     }
-
 
 
 }

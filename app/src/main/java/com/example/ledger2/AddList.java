@@ -92,10 +92,11 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
     static ArrayList<String> arrayIndex = new ArrayList<String>();
     static ArrayList<String> arraySchedule = new ArrayList<String>();
 
-    public String getstitle(){
+    public String getstitle() {
         return stitle;
     }
-    public String getdetails(){
+
+    public String getdetails() {
         return details;
     }
 
