@@ -20,19 +20,21 @@ public class Schedule {
     public int hour;
     public int min;
     public String detail;
+    public String imgUri;
 //    public Bitmap imgUri;
 
     Schedule() {
 //
     }
 
-    Schedule(String title, String dates, int hour, int min, String detail) {
-//        this.id = id;
+    Schedule(String id, String title, String dates, int hour, int min, String detail, String imgUri) {
+        this.id = id;
         this.title = title;
         this.date=dates;
         this.hour = hour;
         this.min = min;
         this.detail = detail;
+        this.imgUri=imgUri;
     }
 
     String getId() {
@@ -83,7 +85,15 @@ public class Schedule {
         this.min = min;
     }
 
-//    void setPmAm(String pmam) {
+    public String getImgUri() {
+        return imgUri;
+    }
+
+    public void setImgUri(String imgUri) {
+        this.imgUri = imgUri;
+    }
+
+    //    void setPmAm(String pmam) {
 //        this.pmam = pmam;
 //    }
 
