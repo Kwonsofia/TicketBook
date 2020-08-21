@@ -182,11 +182,11 @@ public class Calendar extends AppCompatActivity {
             String date = data.getStringExtra("date");
             String time = data.getStringExtra("time");
             String content = data.getStringExtra("content");
-            String url = data.getStringExtra("url");
+            String url = data.getStringExtra("uri");
 
             //Image poster = data.
 
-            String key = url;//
+            String key = date;//
 
             Schedule works = new Schedule(key,title,date,time,content,url);
 
