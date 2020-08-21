@@ -7,7 +7,7 @@ import android.os.Handler;
 
 public class SubMainActivity extends Activity {
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sub_main);
 
@@ -15,9 +15,9 @@ public class SubMainActivity extends Activity {
         hand.postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 finish();
             }
-        },2000);
+        }, 2000);
     }
 }

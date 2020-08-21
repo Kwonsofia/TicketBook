@@ -96,7 +96,7 @@ public class LedgerActivity extends AppCompatActivity {
         textMonth.setText(getTime);
 
 
-        databaseReference = database.getReference(mFirebaseUser.getUid()+"/Ledger"); // DB 테이블 연결
+        databaseReference = database.getReference(mFirebaseUser.getUid() + "/Ledger"); // DB 테이블 연결
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -105,12 +105,11 @@ public class LedgerActivity extends AppCompatActivity {
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) { // 반복문으로 List 추출
                     LedgerItem item = snapshot.getValue(LedgerItem.class); //만들어졌던 Ledger 객체에 데이터를 담음
-                    String str = item.getDate().substring(0,7);
-                    if(getTime.equals(str)){
+                    String str = item.getDate().substring(0, 7);
+                    if (getTime.equals(str)) {
                         arrayList.add(item);
                     }
                 }
-
 
 
                 // 총액 계산하기
@@ -126,7 +125,7 @@ public class LedgerActivity extends AppCompatActivity {
             }
         });
 
-        adapter = new RecyclerAdapter(arrayList, this,database);
+        adapter = new RecyclerAdapter(arrayList, this, database);
         recyclerView.setAdapter(adapter);
 
 
@@ -147,7 +146,7 @@ public class LedgerActivity extends AppCompatActivity {
                 String month = textMonth.getText().toString().replace("-", "");
                 int M = Integer.parseInt(month);
 
-                if ((M - 1)%100 == 0) {
+                if ((M - 1) % 100 == 0) {
                     M = M - 89;
                 } else {
                     M--;
@@ -168,12 +167,11 @@ public class LedgerActivity extends AppCompatActivity {
 
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) { // 반복문으로 List 추출
                             LedgerItem item = snapshot.getValue(LedgerItem.class); //만들어졌던 Ledger 객체에 데이터를 담음
-                            String str = item.getDate().substring(0,7);
-                            if(rDate.equals(str)){
+                            String str = item.getDate().substring(0, 7);
+                            if (rDate.equals(str)) {
                                 arrayList.add(item);
                             }
                         }
-
 
 
                         // 총액 계산하기
@@ -194,8 +192,6 @@ public class LedgerActivity extends AppCompatActivity {
 //                recyclerView.setAdapter(recyclerAdapter);
 
 
-
-
             }
         });
 
@@ -206,7 +202,7 @@ public class LedgerActivity extends AppCompatActivity {
                 String month = textMonth.getText().toString().replace("-", "");
                 int M = Integer.parseInt(month);
 
-                if ((M + 1)%100 == 13) {
+                if ((M + 1) % 100 == 13) {
                     M = M + 89;
                 } else {
                     M++;
@@ -227,12 +223,11 @@ public class LedgerActivity extends AppCompatActivity {
 
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) { // 반복문으로 List 추출
                             LedgerItem item = snapshot.getValue(LedgerItem.class); //만들어졌던 Ledger 객체에 데이터를 담음
-                            String str = item.getDate().substring(0,7);
-                            if(rDate2.equals(str)){
+                            String str = item.getDate().substring(0, 7);
+                            if (rDate2.equals(str)) {
                                 arrayList.add(item);
                             }
                         }
-
 
 
                         // 총액 계산하기
@@ -305,8 +300,7 @@ public class LedgerActivity extends AppCompatActivity {
             LedgerItem memo = new LedgerItem(date, type, title, price, key);
 
 
-
-            database.getReference(mFirebaseUser.getUid()+"/Ledger/"+key).setValue(memo);
+            database.getReference(mFirebaseUser.getUid() + "/Ledger/" + key).setValue(memo);
 
 //            database.getReference("Ledger")
 //                    .push()
@@ -314,7 +308,6 @@ public class LedgerActivity extends AppCompatActivity {
 
         }
     }
-
 
 
 }

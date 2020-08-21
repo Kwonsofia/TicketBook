@@ -60,8 +60,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
     public void onBindViewHolder(@NonNull RecyclerViewHolder itemViewHolder, int i) {
 
         String date_day = arrayList.get(i).getDate().substring(8);
-        String date = arrayList.get(i).getDate().substring(0,7);
-        String date_dayy ="";
+        String date = arrayList.get(i).getDate().substring(0, 7);
+        String date_dayy = "";
         try {
             date_dayy = getDateDay(arrayList.get(i).getDate(), "yyyy-MM-dd");
         } catch (Exception e) {
@@ -93,7 +93,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         FirebaseAuth mFirebaseAuth;
         FirebaseUser mFirebaseUser;
 
-        public RecyclerViewHolder(@NonNull final View itemView){
+        public RecyclerViewHolder(@NonNull final View itemView) {
             super(itemView);
 
             this.date = itemView.findViewById(R.id.textView_date_day);
@@ -120,16 +120,16 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
                     popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                         @Override
                         public boolean onMenuItemClick(MenuItem item) {
-                            switch (item.getItemId()){
+                            switch (item.getItemId()) {
                                 case R.id.delete:
-                                        database
-                                                .getReference(mFirebaseUser.getUid()+"/Ledger/"+selectedKey)
-                                                .removeValue(new DatabaseReference.CompletionListener() {
-                                                    @Override
-                                                    public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                                                        Toast.makeText(context, "삭제가 완료되었습니다.",Toast.LENGTH_LONG).show();
-                                                    }
-                                                });
+                                    database
+                                            .getReference(mFirebaseUser.getUid() + "/Ledger/" + selectedKey)
+                                            .removeValue(new DatabaseReference.CompletionListener() {
+                                                @Override
+                                                public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                                                    Toast.makeText(context, "삭제가 완료되었습니다.", Toast.LENGTH_LONG).show();
+                                                }
+                                            });
 
                                     break;
                             }
@@ -147,53 +147,50 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
     }
 
 
-
-
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return (arrayList != null ? arrayList.size(): 0);
+        return (arrayList != null ? arrayList.size() : 0);
     }
 
 
     //특정 날짜에 대하여 요일을 구함(일 ~ 토)
     public String getDateDay(String date, String dateType) throws Exception {
-        String day = "" ;
+        String day = "";
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat(dateType) ;
-        Date nDate = dateFormat.parse(date) ;
+        SimpleDateFormat dateFormat = new SimpleDateFormat(dateType);
+        Date nDate = dateFormat.parse(date);
 
-        Calendar cal = Calendar.getInstance() ;
+        Calendar cal = Calendar.getInstance();
         cal.setTime(nDate);
 
-        int dayNum = cal.get(Calendar.DAY_OF_WEEK) ;
+        int dayNum = cal.get(Calendar.DAY_OF_WEEK);
 
-        switch(dayNum){
+        switch (dayNum) {
             case 1:
                 day = "일요일";
-                break ;
+                break;
             case 2:
                 day = "월요일";
-                break ;
+                break;
             case 3:
                 day = "화요일";
-                break ;
+                break;
             case 4:
                 day = "수요일";
-                break ;
+                break;
             case 5:
                 day = "목요일";
-                break ;
+                break;
             case 6:
                 day = "금요일";
-                break ;
+                break;
             case 7:
                 day = "토요일";
-                break ;
+                break;
         }
-        return day ;
+        return day;
     }
-
 
 
 }

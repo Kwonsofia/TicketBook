@@ -37,7 +37,7 @@ public class AddActivity extends AppCompatActivity implements SingleChoiceDialog
         ePrice = findViewById(R.id.input_price);
         eTitle = findViewById(R.id.input_title);
 
-        inputDate = String.format("%04d-%02d-%02d", year,month+1, day);
+        inputDate = String.format("%04d-%02d-%02d", year, month + 1, day);
         eDate.setText(inputDate);
 
 
@@ -83,18 +83,18 @@ public class AddActivity extends AppCompatActivity implements SingleChoiceDialog
         });
     }
 
-    public void showDate(){
+    public void showDate() {
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int mYear, int month, int dayOfMonth) {
-                inputDate = String.format("%04d-%02d-%02d",mYear,month+1,dayOfMonth);
+                inputDate = String.format("%04d-%02d-%02d", mYear, month + 1, dayOfMonth);
                 eDate.setText(inputDate);
             }
         }, year, month, day);
         datePickerDialog.show();
     }
 
-    void showType(){
+    void showType() {
         DialogFragment singleChoiceDialog = new SingleChoiceDialogFragment();
         singleChoiceDialog.setCancelable(false);
         singleChoiceDialog.show(getSupportFragmentManager(), "Single Choice Dialog");

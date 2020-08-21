@@ -29,10 +29,10 @@ public class Schedule {
     Schedule(String id, String title, String dates, String time, String detail, String imgUri) {
         this.id = id;
         this.title = title;
-        this.date=dates;
+        this.date = dates;
         this.time = time;
         this.detail = detail;
-        this.imgUri=imgUri;
+        this.imgUri = imgUri;
     }
 
     public String getId() {

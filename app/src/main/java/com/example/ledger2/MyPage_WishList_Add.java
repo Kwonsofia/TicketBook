@@ -58,7 +58,7 @@ public class MyPage_WishList_Add extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mypage_wishlist_add);
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
         }
         storage = FirebaseStorage.getInstance();
@@ -113,7 +113,7 @@ public class MyPage_WishList_Add extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == GALLARY_CODE){
+        if (requestCode == GALLARY_CODE) {
             imagePath = getPath(data.getData());
 
             f = new File(imagePath);
@@ -121,9 +121,9 @@ public class MyPage_WishList_Add extends AppCompatActivity {
         }
     }
 
-    public String getPath(Uri uri){
-        String [] proj = {MediaStore.Images.Media.DATA};
-        CursorLoader cursorLoader = new CursorLoader(this, uri, proj,null,null,null);
+    public String getPath(Uri uri) {
+        String[] proj = {MediaStore.Images.Media.DATA};
+        CursorLoader cursorLoader = new CursorLoader(this, uri, proj, null, null, null);
 
         Cursor cursor = cursorLoader.loadInBackground();
         int index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
@@ -133,11 +133,11 @@ public class MyPage_WishList_Add extends AppCompatActivity {
         return cursor.getString(index);
     }
 
-    private void upload(String uri){
+    private void upload(String uri) {
         StorageReference storageRef = storage.getReferenceFromUrl("gs://ledger2-3da43.appspot.com/");
 
         Uri file = Uri.fromFile(new File(uri));
-        StorageReference riversRef = storageRef.child("images/"+file.getLastPathSegment());
+        StorageReference riversRef = storageRef.child("images/" + file.getLastPathSegment());
         UploadTask uploadTask = riversRef.putFile(file);
 
 // Register observers to listen for when the download is done or if it fails

@@ -77,7 +77,7 @@ public class MyPage_RecyclerAdapter extends RecyclerView.Adapter<MyPage_Recycler
 
     @Override
     public int getItemCount() {
-        return (arrayList != null ? arrayList.size(): 0);
+        return (arrayList != null ? arrayList.size() : 0);
     }
 }
 

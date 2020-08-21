@@ -11,10 +11,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 public class SingleChoiceDialogFragment extends DialogFragment {
-    int position=0;
+    int position = 0;
 
-    public interface SingleChoiceListener{
+    public interface SingleChoiceListener {
         void onPositiveButtonClicked(String[] list, int position);
+
         void onNegativeButtonClicked();
     }
 
@@ -23,10 +24,10 @@ public class SingleChoiceDialogFragment extends DialogFragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        try{
+        try {
             mListener = (SingleChoiceListener) context;
-        }catch (Exception e){
-            throw new ClassCastException(getActivity().toString()+"SingleChoiceListener must implemented");
+        } catch (Exception e) {
+            throw new ClassCastException(getActivity().toString() + "SingleChoiceListener must implemented");
         }
 
     }

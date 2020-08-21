@@ -66,7 +66,7 @@ public class MyPage_WishList extends AppCompatActivity {
         database_mypage = FirebaseDatabase.getInstance();
 
 
-        databaseReference_mypage = database_mypage.getReference(mFirebaseUser.getUid()+"/MyPage"); // DB 테이블 연결
+        databaseReference_mypage = database_mypage.getReference(mFirebaseUser.getUid() + "/MyPage"); // DB 테이블 연결
         databaseReference_mypage.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -97,8 +97,8 @@ public class MyPage_WishList extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent_wish_back = new Intent(getBaseContext(), MyPage.class);
                 startActivity(intent_wish_back);
-                }
-            });
+            }
+        });
 
 
         //추가하기
@@ -109,9 +109,6 @@ public class MyPage_WishList extends AppCompatActivity {
                 startActivityForResult(imageView_wishlist_add, 1);
             }
         });
-
-
-
 
 
     } //OnCreate
@@ -128,9 +125,9 @@ public class MyPage_WishList extends AppCompatActivity {
 
             String key = workname;//
 
-            MyPage_WishList_User2 works = new MyPage_WishList_User2(workname, memo, key,image);
+            MyPage_WishList_User2 works = new MyPage_WishList_User2(workname, memo, key, image);
 
-            database_mypage.getReference(mFirebaseUser.getUid()+"/MyPage/"+key).setValue(works);
+            database_mypage.getReference(mFirebaseUser.getUid() + "/MyPage/" + key).setValue(works);
 
         }
     }

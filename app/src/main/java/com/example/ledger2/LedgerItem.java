@@ -11,15 +11,16 @@ public class LedgerItem implements Comparable<LedgerItem> {
 
     @Override
     public int compareTo(LedgerItem o) {
-        if(this.date.compareTo(o.getDate())>0){
+        if (this.date.compareTo(o.getDate()) > 0) {
             return -1;
-        }else if(this.date.compareTo(o.getDate())<0){
+        } else if (this.date.compareTo(o.getDate()) < 0) {
             return 1;
         }
         return 0;
     }
 
-    public LedgerItem(){}
+    public LedgerItem() {
+    }
 
     public LedgerItem(String date, String type, String title, String price, String key) {
         this.date = date;

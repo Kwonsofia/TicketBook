@@ -39,7 +39,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     EditText password_edittext;
     Button email_login_button;
     Button email_join_button;
-    
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -145,7 +145,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
         if (requestCode == GOOGLE_LOGIN_CODE) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            if(result.isSuccess()){ //인증 결과가 성공적이면
+            if (result.isSuccess()) { //인증 결과가 성공적이면
                 GoogleSignInAccount account = result.getSignInAccount(); //account에 정보가 담겨있음
                 resultLogin(account); //로그인 결과 값 출력 수행하라는 메소드
             }
@@ -153,18 +153,18 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     private void resultLogin(final GoogleSignInAccount account) {
-        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(),null);
+        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()){ //로그인이 성공했으면
-                            Toast.makeText(LoginActivity.this,"로그인 성공",Toast.LENGTH_SHORT).show();
+                        if (task.isSuccessful()) { //로그인이 성공했으면
+                            Toast.makeText(LoginActivity.this, "로그인 성공", Toast.LENGTH_SHORT).show();
 //                            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
 //                            intent.putExtra("nicName",account.getDisplayName()); // 구글의 닉네임 가져옴
                             startActivity(new Intent(getApplicationContext(), Calendar.class));
-                        }else { //로그인이 실패했으면
-                            Toast.makeText(LoginActivity.this,"로그인 실패",Toast.LENGTH_SHORT).show();
+                        } else { //로그인이 실패했으면
+                            Toast.makeText(LoginActivity.this, "로그인 실패", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
