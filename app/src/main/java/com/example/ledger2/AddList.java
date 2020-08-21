@@ -117,13 +117,13 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
 
 
         //이미지 가져오기
-        ImageButton imageAddButton = (ImageButton) findViewById(R.id.image_add);
+        ImageButton imageAddButton = findViewById(R.id.image_add_sche);
         imageAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent3 = new Intent(getBaseContext(), AddList.class);
+               /* Intent intent3 = new Intent(getBaseContext(), AddList.class);
                 startActivity(intent3);
-                finish();
+                finish();*/
 
                 DialogInterface.OnClickListener cameraListener = new DialogInterface.OnClickListener() {
                     @Override
@@ -146,7 +146,7 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
                     }
                 };
 
-                new AlertDialog.Builder(getBaseContext())
+                new AlertDialog.Builder(AddList.this)
                         .setTitle("업로드 할 이미지를 선택하세요")
                         .setPositiveButton("사진촬영", cameraListener)
                         .setNeutralButton("앨범선택", albumListener)
@@ -200,7 +200,7 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
         });
     }
 
-    public void doTakeAlbumAction() { //카메라 촬영 후 이미지 가져오기
+    public void doTakePhotoAction() { //카메라 촬영 후 이미지 가져오기
         Intent intent4 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         String url = "tmp_" + String.valueOf(System.currentTimeMillis()) + ".jpg";
@@ -210,7 +210,7 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
         startActivityForResult(intent4, PICK_FROM_CAMERA);
     }
 
-    public void doTakePhotoAction() {  //앨범에서 이미지 가져오기
+    public void doTakeAlbumAction() {  //앨범에서 이미지 가져오기
         Intent intent5 = new Intent(Intent.ACTION_PICK);
         intent5.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
         startActivityForResult(intent5, PICK_FROM_ALBUM);

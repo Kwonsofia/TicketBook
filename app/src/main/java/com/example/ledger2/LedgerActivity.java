@@ -70,7 +70,6 @@ public class LedgerActivity extends AppCompatActivity {
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
 
-
         textMonth = findViewById(R.id.textMonth);
         textSum = findViewById(R.id.textSum);
         calendar_page = findViewById(R.id.calendar_page);
