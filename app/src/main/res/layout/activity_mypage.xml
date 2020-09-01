@@ -80,31 +80,6 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#ffffff"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="30dp"
-                android:padding="5dp"
-                android:src="@drawable/person" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="사용자명"
-                android:textColor="#000000"
-                android:textSize="20dp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#000000" />
 
@@ -121,15 +96,14 @@
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewpager"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="300dp"
             android:layout_weight="9"
             android:background="#ffffff" />
 
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="85dp"
-            android:layout_weight="1"
+            android:layout_height="60dp"
             android:layout_gravity="bottom"
             android:background="@color/colorMenu"
             android:orientation="horizontal">

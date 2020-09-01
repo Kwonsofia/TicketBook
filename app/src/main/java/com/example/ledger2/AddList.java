@@ -181,7 +181,7 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
 
                 //시간
                 onTimeChanged(timePicker, hour, min);
-                sTime=getAmPm(hour)+" "+hour+"시 "+min+"분";
+                sTime = getAmPm(hour) + " " + hour + "시 " + min + "분";
 
                 //상세내용
                 details = detail.getText().toString();
@@ -191,21 +191,11 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
                 title.requestFocus();
                 title.setCursorVisible(true);
 
-//                Intent intent2 = new Intent(getBaseContext(), Calendar.class);
-//                startActivity(intent2);
-//                finish();
-
-
-//                if(f==null){
-//                    f = new File(imagePath);
-//                }
-
                 Intent intent = new Intent();
                 intent.putExtra("title", stitle);
                 intent.putExtra("date", date_set);
                 intent.putExtra("time", sTime);
                 intent.putExtra("content", details);
-//                intent.putExtra("uri",Uri.fromFile(f).toString());
 
                 setResult(3, intent);
 
@@ -245,7 +235,6 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
         StorageReference riversRef = storageRef.child("images/" + file.getLastPathSegment());
         UploadTask uploadTask = riversRef.putFile(file);
 
-// Register observers to listen for when the download is done or if it fails
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
@@ -285,8 +274,8 @@ public class AddList extends AppCompatActivity implements TimePicker.OnTimeChang
         datePickerDialog.show();
     }
 
-    private String getAmPm(int hour){
-        if(hour<=12)
+    private String getAmPm(int hour) {
+        if (hour <= 12)
             return "AM";
         else
             return "PM";

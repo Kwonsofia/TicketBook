@@ -112,8 +112,7 @@ public class MyPage extends AppCompatActivity implements NavigationView.OnNaviga
         toggle.syncState();
 
 
-        navigationView.setNavigationItemSelectedListener(this); ///parameter변환이 아니라 implement... 이거 때문에 몇시간을 버린건지....
-        //navigationView.setCheckedItem(R.id.home);
+        navigationView.setNavigationItemSelectedListener(this);
 
         ImageView openMenuImage = (ImageView) findViewById(R.id.icon_menu);
         // 메뉴 이미지 클릭 시 메뉴 열리게 함.
@@ -158,14 +157,7 @@ public class MyPage extends AppCompatActivity implements NavigationView.OnNaviga
                 startActivity(intent_logout);
                 break;
         }
-        //drawerLayout.closeDrawer(GravityCompat.START);
-        //메뉴가 선택되면 행해지기 전에 Drawer가 닫힘.
         return true;
     }
-
-//    @Override
-//    public void onPointerCaptureChanged(boolean hasCapture) {
-//
-//    }
 }
 

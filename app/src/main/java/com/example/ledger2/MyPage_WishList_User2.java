@@ -10,7 +10,6 @@ public class MyPage_WishList_User2 implements Comparable<MyPage_WishList_User2> 
     public String memo;
     public String key;
     public String poster;
-    //public Image poster;
 
     public MyPage_WishList_User2() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
@@ -20,7 +19,6 @@ public class MyPage_WishList_User2 implements Comparable<MyPage_WishList_User2> 
 
         this.workname = workname;
         this.memo = memo;
-        /////this.poster = poster;
         this.key = key;
         this.poster = poster;
     }

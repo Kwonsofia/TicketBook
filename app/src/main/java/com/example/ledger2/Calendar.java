@@ -67,9 +67,6 @@ public class Calendar extends AppCompatActivity {
         ImageButton addButton = (ImageButton) findViewById(R.id.add);
         addButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {  //추가
-//                Intent intent = new Intent(getBaseContext(), AddList.class);
-//                startActivity(intent);
-//                finish();
                 Intent schedule_add = new Intent(getBaseContext(), AddList.class);
                 startActivityForResult(schedule_add, 3);
             }
@@ -110,32 +107,6 @@ public class Calendar extends AppCompatActivity {
             }
 
         });
-
-//        scheduleReference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                // firebase database의 data를 받아오는 곳
-//
-//                for (DataSnapshot snapshot : dataSnapshot.getChildren()) { // 반복문으로 List 추출
-//                    Schedule list = snapshot.getValue(Schedule.class);
-//                    String date = list.getDate();
-//                    Log.d("Date", date);
-//                    if(cDate.equals(date)){
-//                        arrayLists.add(list);
-//                    }
-//                }
-//                scheduleAdapter.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//                // DB를 가져오던 중 error 발생 시
-//                Log.d("LedgerActivity", String.valueOf(databaseError.toException()));
-//            }
-//        });
-
-
-
 
         scheduleAdapter = new CalRecyclerAdapter(arrayLists);
         scheduleList.setAdapter(scheduleAdapter);
@@ -180,14 +151,8 @@ public class Calendar extends AppCompatActivity {
             String date = data.getStringExtra("date");
             String time = data.getStringExtra("time");
             String content = data.getStringExtra("content");
-//            String url = data.getStringExtra("uri");
-
-            //Image poster = data.
-
             String key = date;//
-
             Schedule works = new Schedule(key, title, date, time, content);
-
             database.getReference(mFirebaseUser.getUid() + "/Calendar/" + key).setValue(works);
 
         }

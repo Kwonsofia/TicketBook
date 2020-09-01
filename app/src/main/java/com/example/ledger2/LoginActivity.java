@@ -160,8 +160,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) { //로그인이 성공했으면
                             Toast.makeText(LoginActivity.this, "로그인 성공", Toast.LENGTH_SHORT).show();
-//                            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-//                            intent.putExtra("nicName",account.getDisplayName()); // 구글의 닉네임 가져옴
                             startActivity(new Intent(getApplicationContext(), Calendar.class));
                         } else { //로그인이 실패했으면
                             Toast.makeText(LoginActivity.this, "로그인 실패", Toast.LENGTH_SHORT).show();
